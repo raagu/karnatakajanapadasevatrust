@@ -4,7 +4,7 @@ A responsive website with a modern photographic layout, 20 researched traditions
 
 The default language is Kannada, using the official name **ಕರ್ನಾಟಕ ಜನಪದ ಸೇವಾ ಟ್ರಸ್ಟ್**. A persistent Kannada/English switch translates the page, art details, dialogs, form labels, validation, WhatsApp message boilerplate, accessible labels and search metadata. The choice is saved on the visitor's device in `localStorage`; enquiry details are not stored. Dialog language controls preserve entered values and selected interests. The default HTML contains Kannada before JavaScript runs.
 
-## Preview
+## Look Preview
 
 Requirements: Node.js 22 or newer and Python 3.
 
