@@ -822,14 +822,17 @@ test("Kannada layouts remain within the viewport and pass automated accessibilit
   }
 });
 
-test("category tabs expose all four parts of Karnataka folk heritage", async () => {
+test("category tabs expose all seven parts of Karnataka folk heritage", async () => {
   await withPage({ width: 1440, height: 1000 }, async (page) => {
-    await expect(page.locator(".art-card")).toHaveCount(20);
+    await expect(page.locator(".art-card")).toHaveCount(galleryEntries.length);
     for (const [category, count] of Object.entries({
       literature: 4,
       music: 4,
-      dance: 8,
-      crafts: 4,
+      dance: 11,
+      ritual: 3,
+      puppetry: 3,
+      crafts: 5,
+      instruments: 8,
     })) {
       const filter = page.locator(`[data-category="${category}"]`);
       await filter.click();
@@ -851,13 +854,13 @@ test("category tabs expose all four parts of Karnataka folk heritage", async () 
       ).toHaveCount(1);
     }
     await page.locator('[data-category="all"]').click();
-    await expect(page.locator(".art-card:visible")).toHaveCount(20);
+    await expect(page.locator(".art-card:visible")).toHaveCount(galleryEntries.length);
   });
 });
 
 test("category and region filters intersect and an empty result can reset both", async () => {
   await withPage({ width: 1440, height: 1000 }, async (page) => {
-    for (const category of ["literature", "music", "dance", "crafts"]) {
+    for (const category of ["literature", "music", "dance", "ritual", "puppetry", "crafts", "instruments"]) {
       await page.locator(`[data-category="${category}"]`).click();
       for (const region of ["karavali", "bayaluseeme", "malenadu"]) {
         await page.locator(`[data-filter="${region}"]`).click();
@@ -910,7 +913,7 @@ test("category and region filters intersect and an empty result can reset both",
       "aria-pressed",
       "true",
     );
-    await expect(page.locator(".art-card:visible")).toHaveCount(20);
+    await expect(page.locator(".art-card:visible")).toHaveCount(galleryEntries.length);
   });
 });
 
@@ -1001,7 +1004,7 @@ test("search finds English and Kannada names regardless of the interface languag
     await expect(page.locator('[data-art="channapatna"]')).toBeVisible();
     await page.locator("[data-clear-search]").click();
     await expect(search).toHaveValue("");
-    await expect(page.locator(".art-card:visible")).toHaveCount(20);
+    await expect(page.locator(".art-card:visible")).toHaveCount(galleryEntries.length);
   });
 });
 
@@ -1037,13 +1040,13 @@ test("search combines with category and region, while reset clears all three cho
       "aria-pressed",
       "true",
     );
-    await expect(page.locator(".art-card:visible")).toHaveCount(20);
+    await expect(page.locator(".art-card:visible")).toHaveCount(galleryEntries.length);
   });
 });
 
 test("category shortcuts lead directly to the relevant collection", async () => {
   await withPage({ width: 1440, height: 1000 }, async (page) => {
-    for (const category of ["literature", "music", "dance", "crafts"]) {
+    for (const category of ["literature", "music", "dance", "ritual", "puppetry", "crafts", "instruments"]) {
       const shortcut = page
         .locator(`[data-browse-category="${category}"]`)
         .first();
@@ -1086,6 +1089,81 @@ test("every gallery and detail image is a photograph and Kinnal context is visib
         ratio: 1,
       });
       await page.keyboard.press("Escape");
+    }
+  });
+});
+
+test("rituals and puppet forms have distinct groups and translated detail without duplicating Togalu", async () => {
+  await withPage({ width: 1440, height: 1000 }, async (page) => {
+    for (const language of ["kn", "en"]) {
+      await page.locator(`[data-language="${language}"]`).first().click();
+      for (const [category, ids] of Object.entries({
+        ritual: ["bengaluru-karaga", "bhootha-aradhane", "nagamandala"],
+        puppetry: ["gaarudi-gombe", "puppetry", "sootrada-gombeyata"],
+      })) {
+        await page.locator(`[data-category="${category}"]`).click();
+        assert.deepEqual(await page.locator(".art-card:visible").evaluateAll((cards) => cards.map((card) => card.dataset.art).sort()), ids);
+        for (const id of ids) {
+          const entry = galleryEntries.find((item) => item.id === id);
+          await page.locator(`.art-card [data-art-open="${id}"]`).click();
+          await expect(page.locator("#dialog-title")).toHaveText(entry[language].name);
+          await expect(page.locator("#dialog-content")).toContainText(entry[language].origin);
+          await expect.poll(() => page.locator(".dialog-photo").evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+          await page.keyboard.press("Escape");
+        }
+      }
+    }
+    await expect(page.locator('.art-card[data-art="puppetry"]')).toHaveCount(1);
+  });
+});
+
+test("the dedicated instrument section is accessible in both languages on desktop and mobile", async () => {
+  for (const width of [390, 1440]) {
+    await withPage({ width, height: 1000 }, async (page) => {
+      const instruments = galleryEntries.filter((entry) => entry.category === "instruments");
+      await page.locator('.category-shortcut[data-browse-category="instruments"]').click();
+      await expect(page).toHaveURL(/#instruments$/);
+      await expect(page.locator("#instruments-heading")).toBeInViewport();
+      await expect(page.locator("#instruments .instrument-card")).toHaveCount(8);
+      for (const language of ["kn", "en"]) {
+        await page.locator(`[data-language="${language}"]`).first().click();
+        for (const entry of instruments) {
+          const card = page.locator(`[data-instrument="${entry.id}"]`);
+          await expect(card.locator("h3")).toHaveText(entry[language].name);
+          await expect(card.locator(".instrument-summary")).toHaveText(entry[language].summary);
+          await card.locator("button").click();
+          await expect(page.locator("#dialog-title")).toHaveText(entry[language].name);
+          await expect.poll(() => page.locator(".dialog-photo").evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+          await page.keyboard.press("Escape");
+          if (entry.photoFit === "contain") {
+            const imageBox = await card.locator("img").boundingBox();
+            const containerBox = await card.locator(".instrument-photo").boundingBox();
+            assert.ok(imageBox.height <= containerBox.height + 1, "Instrument images must fit their frames without being clipped.");
+          }
+        }
+      }
+      await page.locator("#instruments [data-browse-category]").click();
+      await expect(page.locator('.art-card:visible')).toHaveCount(8);
+      await expect(page.locator('[data-category="instruments"]')).toHaveAttribute("aria-pressed", "true");
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    });
+  }
+});
+
+test("selected theatre photographs have their own translated credits rather than the leader portrait credit", async () => {
+  await withPage({ width: 1440, height: 1000 }, async (page) => {
+    for (const id of ["krishna-parijatha", "sannata-bayalata"]) {
+      const entry = galleryEntries.find((item) => item.id === id);
+      await page.locator(`.art-card [data-art-open="${id}"]`).click();
+      const credit = page.locator("#art-credit");
+      await expect(credit).toContainText("No public reuse license is asserted");
+      await expect(credit).not.toContainText("Hayath Kargal");
+      await expect(page.locator(".dialog-photo-caption")).toContainText(entry.photoCaption.en);
+      await page.locator('#site-dialog [data-language="kn"]').click();
+      await expect(credit).toContainText("ಸಾರ್ವಜನಿಕ ಮರುಬಳಕೆಯ");
+      await expect(page.locator(".dialog-photo-caption")).toContainText(entry.photoCaption.kn);
+      await page.keyboard.press("Escape");
+      await page.locator('[data-language="en"]').first().click();
     }
   });
 });

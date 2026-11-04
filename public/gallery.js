@@ -18,7 +18,7 @@ export const galleryLabels = {
     photoUnavailable: "Photo temporarily unavailable",
     contextPhoto: "Photo context",
     shortcutsTitle: "Find your connection",
-    shortcutsIntro: "Four ways to discover Karnataka’s living heritage.",
+    shortcutsIntro: "Discover Karnataka through its stories, music, performance, worship and craftsmanship.",
     traditions: "traditions",
     searchHint: "Try “Yakshagana”, “ಕಿನ್ನಾಳ” or a region",
     activeFilters: "Your filters",
@@ -38,7 +38,7 @@ export const galleryLabels = {
     photoUnavailable: "ಛಾಯಾಚಿತ್ರ ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ",
     contextPhoto: "ಛಾಯಾಚಿತ್ರದ ಸಂದರ್ಭ",
     shortcutsTitle: "ನಿಮ್ಮ ಆಸಕ್ತಿಯ ಪರಂಪರೆಯತ್ತ",
-    shortcutsIntro: "ಕರ್ನಾಟಕದ ಜೀವಂತ ಪರಂಪರೆಯನ್ನು ಅರಿಯಲು ನಾಲ್ಕು ದಾರಿಗಳು.",
+    shortcutsIntro: "ಕಥೆ, ಸಂಗೀತ, ರಂಗಕಲೆ, ಆರಾಧನೆ ಮತ್ತು ಕರಕುಶಲದ ಮೂಲಕ ಕರ್ನಾಟಕದ ಪರಂಪರೆಯನ್ನು ಅರಿಯೋಣ.",
     traditions: "ಪರಂಪರೆಗಳು",
     searchHint: "“ಯಕ್ಷಗಾನ”, “ಕಿನ್ನಾಳ” ಅಥವಾ ಪ್ರದೇಶದ ಹೆಸರು ಹುಡುಕಿ",
     activeFilters: "ನಿಮ್ಮ ಆಯ್ಕೆಗಳು",
@@ -58,7 +58,10 @@ const categoryShort = {
   literature: { en: "Literature", kn: "ಸಾಹಿತ್ಯ" },
   music: { en: "Music", kn: "ಸಂಗೀತ" },
   dance: { en: "Performance", kn: "ರಂಗಕಲೆ" },
+  ritual: { en: "Worship & Ritual", kn: "ಆರಾಧನೆ" },
+  puppetry: { en: "Puppetry", kn: "ಗೊಂಬೆಯಾಟ" },
   crafts: { en: "Crafts", kn: "ಕರಕುಶಲ" },
+  instruments: { en: "Instruments", kn: "ವಾದ್ಯಗಳು" },
 };
 export function categoryLabel(id, language) {
   return categoryShort[id][language];
@@ -78,8 +81,8 @@ export function renderGallery(language = "kn") {
       const category = categories.find(
         (category) => category.id === entry.category,
       );
-      const responsive = entry.smallImageSrc
-        ? `srcset="${escapeHTML(assetPath(entry.smallImageSrc))} 640w, ${escapeHTML(assetPath(entry.imageSrc))} 1200w" sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"`
+      const responsive = entry.smallImageSrc && entry.smallImageWidth < entry.imageWidth
+        ? `srcset="${escapeHTML(assetPath(entry.smallImageSrc))} ${entry.smallImageWidth}w, ${escapeHTML(assetPath(entry.imageSrc))} ${entry.imageWidth}w" sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"`
         : "";
       const photoClass = ` class="art-photo photo-${entry.id}${entry.photoFit === "contain" ? " photo-contain" : ""}"`;
       return `<article class="art-card" data-regions="${entry.regions.join(" ")}" data-category-card="${entry.category}" data-art="${entry.id}"><button type="button" class="art-open" data-art-open="${entry.id}" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="art-image"><img${photoClass} src="${escapeHTML(assetPath(entry.imageSrc))}" ${responsive} width="1200" height="800" alt="${escapeHTML(copy.alt)}" loading="lazy"><span class="art-category-badge">${escapeHTML(categoryShort[entry.category][language])}</span><span class="art-arrow" aria-hidden="true">↗</span></div><div class="art-body"><p class="art-region">${escapeHTML(copy.region)}</p><h3>${escapeHTML(copy.name)}</h3><p class="art-summary">${escapeHTML(copy.summary)}</p><span class="art-cta">${labels.explore}<span aria-hidden="true">→</span></span></div></button>${entry.photoCaption[language] ? `<p class="art-photo-caption"><span data-i18n="gallery.contextPhoto">${labels.contextPhoto}</span>: <span class="photo-caption-copy">${escapeHTML(entry.photoCaption[language])}</span></p>` : ""}</article>`;
@@ -110,7 +113,10 @@ export function renderShortcuts(language = "kn") {
     literature: "folk-tales",
     music: "sobane",
     dance: "yakshagana",
+    ritual: "bhootha-aradhane",
+    puppetry: "gaarudi-gombe",
     crafts: "kinhal",
+    instruments: "instrument-kinnari",
   };
   return `<section class="category-shortcuts section" aria-labelledby="shortcut-heading"><div class="section-heading-row"><div><p class="eyebrow" data-i18n="shortcuts.eyebrow">${language === "kn" ? "ಒಂದು ನಾಡು. ಹಲವು ಅಭಿವ್ಯಕ್ತಿಗಳು." : "ONE LAND. MANY EXPRESSIONS."}</p><h2 id="shortcut-heading" data-i18n="gallery.shortcutsTitle">${labels.shortcutsTitle}</h2></div><p data-i18n="gallery.shortcutsIntro">${labels.shortcutsIntro}</p></div><div class="shortcut-grid">${categories
     .filter((category) => category.id !== "all")
@@ -118,9 +124,33 @@ export function renderShortcuts(language = "kn") {
       const entry = galleryEntries.find(
         (item) => item.id === samples[category.id],
       );
-      return `<a class="category-shortcut" href="#heritage" data-browse-category="${category.id}"><img src="${escapeHTML(assetPath(entry.smallImageSrc || entry.imageSrc))}" width="640" height="420" loading="lazy" alt="${escapeHTML(entry[language].alt)}" data-shortcut-photo="${entry.id}"><div><span class="shortcut-count" data-shortcut-count="${category.id}">${galleryEntries.filter((entry) => entry.category === category.id).length} ${labels.traditions}</span><h3 data-i18n="shortcut.${category.id}">${category[language]}</h3><span class="shortcut-arrow" aria-hidden="true">↗</span></div></a>`;
+      return `<a class="category-shortcut" href="${category.id === "instruments" ? "#instruments" : "#heritage"}" data-browse-category="${category.id}"><img src="${escapeHTML(assetPath(entry.smallImageSrc || entry.imageSrc))}" width="640" height="420" loading="lazy" alt="${escapeHTML(entry[language].alt)}" data-shortcut-photo="${entry.id}"><div><span class="shortcut-count" data-shortcut-count="${category.id}">${galleryEntries.filter((entry) => entry.category === category.id).length} ${labels.traditions}</span><h3 data-i18n="shortcut.${category.id}">${category[language]}</h3><span class="shortcut-arrow" aria-hidden="true">↗</span></div></a>`;
     })
     .join("")}</div></section>`;
+}
+export const instrumentLabels = {
+  en: {
+    eyebrow: "THE SOUND OF OUR HERITAGE",
+    heading: "Karnataka’s folk musical instruments",
+    intro: "Meet the percussion, string and wind instruments that accompany community songs, theatre and devotion. Some instrument families are shared with other regions of India.",
+    browse: "Explore instruments in the collection",
+    explore: "Discover this instrument",
+  },
+  kn: {
+    eyebrow: "ನಮ್ಮ ಪರಂಪರೆಯ ನಾದ",
+    heading: "ಕರ್ನಾಟಕದ ಜನಪದ ಸಂಗೀತ ವಾದ್ಯಗಳು",
+    intro: "ಸಮುದಾಯದ ಹಾಡು, ರಂಗಭೂಮಿ ಮತ್ತು ಆರಾಧನೆಯ ಜೊತೆಗಿರುವ ತಾಳ, ತಂತಿ ಮತ್ತು ಗಾಳಿವಾದ್ಯಗಳನ್ನು ಪರಿಚಯಿಸಿಕೊಳ್ಳಿ. ಕೆಲವು ವಾದ್ಯಕುಟುಂಬಗಳು ಭಾರತದ ಇತರೆ ಪ್ರದೇಶಗಳಲ್ಲಿಯೂ ಬಳಕೆಯಲ್ಲಿವೆ.",
+    browse: "ಸಂಗ್ರಹದಲ್ಲಿರುವ ವಾದ್ಯಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
+    explore: "ಈ ವಾದ್ಯವನ್ನು ಪರಿಚಯಿಸಿಕೊಳ್ಳಿ",
+  },
+};
+export function renderInstrumentSection(language = "kn") {
+  const labels = instrumentLabels[language];
+  const cards = galleryEntries.filter((entry) => entry.category === "instruments").map((entry) => {
+    const copy = entry[language];
+    return `<article class="instrument-card" data-instrument="${entry.id}"><button type="button" class="instrument-open" data-art-open="${entry.id}" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="instrument-photo"><img class="${entry.photoFit === "contain" ? "photo-contain" : ""}" src="${escapeHTML(assetPath(entry.smallImageSrc || entry.imageSrc))}" width="640" height="420" loading="lazy" alt="${escapeHTML(copy.alt)}"></div><div class="instrument-body"><p class="instrument-family">${escapeHTML(copy.tag)}</p><h3>${escapeHTML(copy.name)}</h3><p class="instrument-summary">${escapeHTML(copy.summary)}</p><span class="instrument-cta">${labels.explore}<span aria-hidden="true">↗</span></span></div></button></article>`;
+  }).join("");
+  return `<section id="instruments" class="section instruments-section" aria-labelledby="instruments-heading"><div class="section-heading-row"><div><p class="eyebrow" data-i18n="instruments.eyebrow">${labels.eyebrow}</p><h2 id="instruments-heading" data-i18n="instruments.heading">${labels.heading}</h2></div><p data-i18n="instruments.intro">${labels.intro}</p></div><div class="instrument-grid">${cards}</div><a class="button button-outline" href="#heritage" data-browse-category="instruments" data-i18n="instruments.browse">${labels.browse}</a></section>`;
 }
 function replaceBlock(html, start, end, content) {
   const a = html.indexOf(start);
@@ -130,6 +160,12 @@ function replaceBlock(html, start, end, content) {
   return html.slice(0, a) + start + content + end + html.slice(b + end.length);
 }
 export function renderHeritageHTML(html) {
+  html = replaceBlock(
+    html,
+    "<!-- folk-instruments:start -->",
+    "<!-- folk-instruments:end -->",
+    renderInstrumentSection("kn"),
+  );
   html = replaceBlock(
     html,
     "<!-- heritage-gallery:start -->",

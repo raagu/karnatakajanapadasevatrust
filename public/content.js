@@ -1,6 +1,8 @@
 import { uiKannada, messages, knArts } from "./translations.js";
-import { expandedTraditions } from "./heritage-expansion.js";
+import { expandedTraditions as originalExpansion } from "./heritage-expansion.js";
+import { heritageAdditions } from "./heritage-additions.js";
 import { photoAssets } from "./photo-assets.js";
+const expandedTraditions = [...originalExpansion, ...heritageAdditions];
 export const CONTACT = Object.freeze({
   phone: "+919902122029",
   display: "+91 99021 22029",
@@ -97,11 +99,14 @@ export const categories = [
   },
   { id: "music", en: "Folk Music", kn: "ಜನಪದ ಸಂಗೀತ" },
   { id: "dance", en: "Dance & Theatre", kn: "ಕುಣಿತ ಮತ್ತು ರಂಗಕಲೆ" },
+  { id: "ritual", en: "Dharmika & Daiva Aradhane", kn: "ಧಾರ್ಮಿಕ ಮತ್ತು ದೈವ ಆರಾಧನೆ" },
+  { id: "puppetry", en: "Gombeyata · Folk Puppetry", kn: "ಗೊಂಬೆಯಾಟ" },
   {
     id: "crafts",
     en: "Material Culture & Crafts",
     kn: "ವಸ್ತು ಸಂಸ್ಕೃತಿ ಮತ್ತು ಕರಕುಶಲ",
   },
+  { id: "instruments", en: "Folk Musical Instruments", kn: "ಜನಪದ ಸಂಗೀತ ವಾದ್ಯಗಳು" },
 ];
 
 const existingRegions = {
@@ -167,7 +172,9 @@ export const galleryEntries = Object.entries(arts).map(([id, art]) => {
   };
   return {
     id,
-    category: expansion?.category || (id === "songs" ? "music" : "dance"),
+    category: expansion?.category || ({ songs: "music", puppetry: "puppetry" }[id] || "dance"),
+    aliases: expansion?.aliases || (id === "puppetry" ? ["Togalu Gombeyata", "Shadow Puppetry", "ತೊಗಲು ಗೊಂಬೆಯಾಟ"] : []),
+    instrumentFamily: expansion?.instrumentFamily || null,
     regions: expansion?.regions || existingRegions[id],
     en,
     kn,
@@ -178,9 +185,14 @@ export const galleryEntries = Object.entries(arts).map(([id, art]) => {
       (art.illustrated ? null : `/images/${art.image}-640.jpg`),
     mediaId: photo?.mediaId || art.mediaId,
     illustrated: photo ? false : Boolean(art.illustrated),
-    photoCaption: { en: photo?.enCaption || "", kn: photo?.knCaption || "" },
-    captionType: photo?.captionType || "documentary",
-    photoFit: photo?.photoFit || "cover",
+    imageWidth: expansion?.imageWidth || 1200,
+    smallImageWidth: expansion?.smallImageWidth || 640,
+    photoCaption: {
+      en: photo?.enCaption || expansion?.photoCaption?.en || "",
+      kn: photo?.knCaption || expansion?.photoCaption?.kn || "",
+    },
+    captionType: photo?.captionType || expansion?.captionType || "documentary",
+    photoFit: photo?.photoFit || expansion?.photoFit || "cover",
     focalPoint: photo?.focalPoint || "50% 50%",
   };
 });
@@ -202,6 +214,7 @@ export function matchesTradition(
           [
             entry.id,
             entry.category,
+            ...(entry.aliases || []),
             entry.en.name,
             entry.kn.name,
             entry.en.region,

@@ -30,11 +30,11 @@ test("WhatsApp enquiry uses the supplied number and preserves special characters
   assert.match(url.searchParams.get("text"), /Name: Asha & Ravi\n/);
   assert.match(url.searchParams.get("text"), /<hello> #culture ಕನ್ನಡ/);
 });
-test("the expanded collection covers four researched categories with bilingual detail", async () => {
-  assert.equal(galleryEntries.length, 20);
-  assert.equal(Object.keys(arts).length, 20);
-  assert.equal(new Set(galleryEntries.map((entry) => entry.id)).size, 20);
-  const expectedCounts = { literature: 4, music: 4, dance: 8, crafts: 4 };
+test("the expanded collection covers seven researched categories with bilingual detail", async () => {
+  assert.equal(galleryEntries.length, 38);
+  assert.equal(Object.keys(arts).length, 38);
+  assert.equal(new Set(galleryEntries.map((entry) => entry.id)).size, 38);
+  const expectedCounts = { literature: 4, music: 4, dance: 11, ritual: 3, puppetry: 3, crafts: 5, instruments: 8 };
   const actualCounts = {};
   for (const entry of galleryEntries) {
     actualCounts[entry.category] = (actualCounts[entry.category] || 0) + 1;
@@ -114,6 +114,52 @@ test("Kinnal photo identifies the joint revival project without claiming exclusi
   assert.match(entry.photoCaption.en, /Sawantwadi[–—-]Kinnal/);
   assert.match(entry.photoCaption.en, /revival project/i);
   assert.match(entry.photoCaption.kn, /ಸಾವಂತವಾಡಿ[–—-]ಕಿನ್ನಾಳ/);
+});
+test("requested additions have the right groups and Togalu Gombeyata is not duplicated", () => {
+  const required = {
+    goravara: "dance",
+    jaggahalige: "dance",
+    "krishna-parijatha": "dance",
+    "sannata-bayalata": "dance",
+    "bhootha-aradhane": "ritual",
+    nagamandala: "ritual",
+    "bengaluru-karaga": "ritual",
+    puppetry: "puppetry",
+    "gaarudi-gombe": "puppetry",
+    "sootrada-gombeyata": "puppetry",
+    "hase-chittara": "crafts",
+  };
+  for (const [id, category] of Object.entries(required)) {
+    const matches = galleryEntries.filter((entry) => entry.id === id);
+    assert.equal(matches.length, 1, `${id} must appear exactly once.`);
+    assert.equal(matches[0].category, category);
+  }
+  assert.equal(galleryEntries.filter((entry) => /Togalu/i.test(entry.en.name)).length, 1);
+  assert.ok(matchesTradition(galleryEntries.find((entry) => entry.id === "puppetry"), { query: "Togalu Gombeyata" }));
+  assert.ok(matchesTradition(galleryEntries.find((entry) => entry.id === "sootrada-gombeyata"), { query: "Sutrada Gombeyata" }));
+});
+test("the instrument collection covers percussion, string and wind instruments", () => {
+  const instruments = galleryEntries.filter((entry) => entry.category === "instruments");
+  assert.deepEqual(instruments.map((entry) => entry.id).sort(), [
+    "instrument-chande", "instrument-damaruga", "instrument-dollu", "instrument-kamsale",
+    "instrument-kinnari", "instrument-maddale", "instrument-pillangovi", "instrument-tamate",
+  ]);
+  assert.deepEqual([...new Set(instruments.map((entry) => entry.instrumentFamily))].sort(), ["percussion", "string", "wind"]);
+  assert.ok(instruments.every((entry) => entry.en.name && entry.kn.name && entry.mediaId));
+});
+test("the two selected theatre thumbnails retain their user-supplied provenance", async () => {
+  const manifest = JSON.parse(await readFile(new URL("../public/media.json", import.meta.url), "utf8"));
+  for (const [id, source] of Object.entries({
+    "krishna-parijatha": "https://i.ytimg.com/vi/6-reLQNXTlA/sddefault.jpg",
+    "sannata-bayalata": "https://i.ytimg.com/vi/q4TekMXDHK4/maxresdefault.jpg",
+  })) {
+    const media = manifest.find((item) => item.id === id);
+    assert.equal(media.rightsType, "user-supplied");
+    assert.equal(media.source, source);
+    assert.doesNotMatch(media.license, /CC BY|Creative Commons|public domain/i);
+    const entry = galleryEntries.find((item) => item.id === id);
+    assert.ok(entry.photoCaption.en && entry.photoCaption.kn);
+  }
 });
 test("search matches either language and combines with category and region", () => {
   const veeragase = galleryEntries.find((item) => item.id === "veeragase");

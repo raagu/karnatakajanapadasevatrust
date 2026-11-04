@@ -8,6 +8,7 @@ import { once } from "node:events";
 import path from "node:path";
 import { chromium, expect } from "@playwright/test";
 import { browserOptions } from "./browser-options.mjs";
+import { galleryEntries } from "../public/content.js";
 
 const cwd = fileURLToPath(new URL("../", import.meta.url));
 const run = (siteURL) =>
@@ -73,14 +74,14 @@ test("configured and unconfigured builds produce truthful search metadata", asyn
     );
     assert.equal(
       [...page.matchAll(/\bdata-art="/g)].length,
-      20,
+      galleryEntries.length,
       `${filename} must render the full collection without JavaScript.`,
     );
     const noScript = page.match(
       /<noscript\b[^>]*>([\s\S]*?)<\/noscript\s*>/i,
     )?.[1];
     assert.ok(noScript, `${filename} needs its non-JavaScript explanation.`);
-    assert.match(noScript, /20/);
+    assert.ok(noScript.includes(String(galleryEntries.length)));
     assert.doesNotMatch(noScript, /ಆರು|all six|six traditions/i);
     assert.match(page, /id="heritage-search"/);
     assert.match(page, /type="search"/);
@@ -161,7 +162,7 @@ test("the production build loads assets, fonts, dialogs and credits inside a Pag
         });
         await page.goto(baseURL, { waitUntil: "load" });
         await expect(page.locator("html")).toHaveAttribute("lang", "kn");
-        await expect(page.locator(".art-card")).toHaveCount(20);
+        await expect(page.locator(".art-card")).toHaveCount(galleryEntries.length);
         for (const image of await page.locator("img").all()) {
           await image.scrollIntoViewIfNeeded();
           await expect.poll(() => image.evaluate((element) => element.complete && element.naturalWidth > 0)).toBe(true);
@@ -180,7 +181,8 @@ test("the production build loads assets, fonts, dialogs and credits inside a Pag
         await expect(page.locator("#art-credit")).toContainText("CC BY");
         await page.keyboard.press("Escape");
         await page.locator('[data-open="credits"]').first().click();
-        await expect(page.locator(".credit-list > li")).toHaveCount(23);
+        const media = await (await page.request.get(baseURL + "media.json")).json();
+        await expect(page.locator(".credit-list > li")).toHaveCount(media.length);
         await page.keyboard.press("Escape");
         // Verify image recovery also stays inside the project directory.
         const cardPhoto = page.locator('[data-art="kinhal"] img');

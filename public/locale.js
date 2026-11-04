@@ -1,6 +1,13 @@
 import { messages, uiKannada } from "./translations.js";
 import { arts, kannadaArts, galleryEntries, categories } from "./content.js";
-import { galleryLabels, categoryLabel } from "./gallery.js";
+import { galleryLabels, categoryLabel, instrumentLabels } from "./gallery.js";
+
+for (const key of Object.keys(instrumentLabels.en))
+  messages[`instruments.${key}`] = {
+    en: instrumentLabels.en[key],
+    kn: instrumentLabels.kn[key],
+    html: false,
+  };
 
 messages["filter.all"] = {
   en: "All regions",
@@ -58,7 +65,7 @@ for (const [key, field] of Object.entries({
 }
 uiKannada.originalIllustration = "ಈ ಜಾಲತಾಣಕ್ಕಾಗಿ ರಚಿಸಿದ ಮೂಲ ಪರಿಚಯ ಚಿತ್ರಣ.";
 uiKannada.suppliedPortraitNote =
-  "ಈ ಜಾಲತಾಣಕ್ಕಾಗಿ ಒದಗಿಸಿದ ಭಾವಚಿತ್ರ; ಛಾಯಾಗ್ರಾಹಕರ ಹೆಸರು ತಿಳಿಸಿಲ್ಲ. ಸಾರ್ವಜನಿಕ ಮರುಬಳಕೆಯ ಪರವಾನಗಿಯನ್ನು ಸೂಚಿಸಲಾಗಿಲ್ಲ.";
+  "ಈ ಜಾಲತಾಣಕ್ಕಾಗಿ ಒದಗಿಸಿದ ಚಿತ್ರ; ಛಾಯಾಗ್ರಾಹಕರ ಹೆಸರು ತಿಳಿಸಿಲ್ಲ. ಸಾರ್ವಜನಿಕ ಮರುಬಳಕೆಯ ಪರವಾನಗಿಯನ್ನು ಸೂಚಿಸಲಾಗಿಲ್ಲ.";
 
 const uiEnglish = {
   trustName: "Karnataka Janapada Seva Trust",
@@ -110,9 +117,9 @@ const uiEnglish = {
   creditsTitle: "The people behind<br>the pictures.",
   creditsLoading: "Loading image credits…",
   creditsIntro:
-    "Folk art photography is shared under the licenses linked below. The original creators retain their rights. Resized files retain their original licenses; display crops vary by screen.",
+    "Each image record links to its source and states its reuse terms. Original creators retain their rights. Photographs and archival video stills are resized for this website; display crops vary by screen.",
   creditsArtworkNote:
-    "Every tradition uses a real photograph. Image captions identify documentary and representative contexts. Hayath Kargal’s portrait was supplied for this website.",
+    "Real photographs and documentary video stills illustrate the collection. Context captions identify representative images; user-selected images carry their own reuse notices.",
   creditsError: "Image credits could not be loaded.",
   openCreditRegister: "Open the credit register",
   orTryAgain: "or try again.",
@@ -234,9 +241,9 @@ export function localizeDynamic(root) {
 export function updateFailureAlts(root = document) {
   for (const image of root.querySelectorAll("img[data-fallback-applied]")) {
     const key = image.getAttribute("data-i18n-alt");
-    const card = image.closest(".art-card");
+    const card = image.closest(".art-card, .instrument-card");
     const entry =
-      card && galleryEntries.find((item) => item.id === card.dataset.art);
+      card && galleryEntries.find((item) => item.id === (card.dataset.art || card.dataset.instrument));
     const base =
       entry?.[language].alt ||
       messages[key]?.[language] ||
@@ -303,6 +310,19 @@ function applyLanguage() {
       `${galleryLabels[language].explore} <span aria-hidden="true">→</span>`;
     const caption = card.querySelector(".photo-caption-copy");
     if (caption) caption.textContent = entry.photoCaption[language];
+  }
+  for (const card of document.querySelectorAll("[data-instrument]")) {
+    const entry = galleryEntries.find((item) => item.id === card.dataset.instrument);
+    if (!entry) continue;
+    const copy = entry[language];
+    card.querySelector("h3").textContent = copy.name;
+    card.querySelector(".instrument-family").textContent = copy.tag;
+    card.querySelector(".instrument-summary").textContent = copy.summary;
+    card.querySelector("img").alt = copy.alt;
+    card.querySelector(".instrument-open").setAttribute("aria-label",
+      language === "kn" ? `${copy.name} ಪರಿಚಯ` : `Explore ${copy.name}`);
+    card.querySelector(".instrument-cta").innerHTML =
+      `${instrumentLabels[language].explore}<span aria-hidden="true">↗</span>`;
   }
   for (const image of document.querySelectorAll("[data-shortcut-photo]")) {
     const entry = galleryEntries.find(

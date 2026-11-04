@@ -625,5 +625,387 @@
     "captionType": "documentary",
     "enCaption": "Veeragase performers in a documented festival procession, photographed in February 2024.",
     "knCaption": "2024ರ ಫೆಬ್ರವರಿಯಲ್ಲಿ ದಾಖಲಿಸಿದ ಉತ್ಸವದ ಮೆರವಣಿಗೆಯಲ್ಲಿರುವ ವೀರಗಾಸೆ ಕಲಾವಿದರು."
+  },
+  {
+    "id": "goravara",
+    "title": "Goravara Kunitha 07.JPG",
+    "local": "/images/goravara.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Goravara_Kunitha_07.JPG",
+    "creator": "Pavanaja",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/0/01/Goravara_Kunitha_07.JPG",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Goravara_Kunitha_07.JPG/1280px-Goravara_Kunitha_07.JPG",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "src": "/images/goravara.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/goravara-640.jpg",
+        "width": 640,
+        "height": 426
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "jaggahalige",
+    "title": "Jaggahalige Byhatti Hubballi Ashtami.webm",
+    "local": "/images/jaggahalige.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Jaggahalige_Byhatti_Hubballi_Ashtami.webm",
+    "creator": "Krishnaiah S A",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceVideo": "https://upload.wikimedia.org/wikipedia/commons/8/85/Jaggahalige_Byhatti_Hubballi_Ashtami.webm",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Jaggahalige_Byhatti_Hubballi_Ashtami.webm/960px--Jaggahalige_Byhatti_Hubballi_Ashtami.webm.jpg",
+    "width": 960,
+    "height": 532,
+    "variants": [
+      {
+        "src": "/images/jaggahalige.jpg",
+        "width": 960,
+        "height": 532
+      },
+      {
+        "src": "/images/jaggahalige-640.jpg",
+        "width": 640,
+        "height": 355
+      }
+    ],
+    "note": "Poster still from the linked documentary video. Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "bhootha-aradhane",
+    "title": "Bhoota Kola 2023.jpg",
+    "local": "/images/bhootha-aradhane.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bhoota_Kola_2023.jpg",
+    "creator": "Ashay vb",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/6/68/Bhoota_Kola_2023.jpg",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Bhoota_Kola_2023.jpg/1280px-Bhoota_Kola_2023.jpg",
+    "width": 1200,
+    "height": 960,
+    "variants": [
+      {
+        "src": "/images/bhootha-aradhane.jpg",
+        "width": 1200,
+        "height": 960
+      },
+      {
+        "src": "/images/bhootha-aradhane-640.jpg",
+        "width": 640,
+        "height": 512
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "nagamandala",
+    "title": "Nagamandala.jpg",
+    "local": "/images/nagamandala.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Nagamandala.jpg",
+    "creator": "Muskeeter8",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:Nagamandala.jpg#Licensing",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/2/27/Nagamandala.jpg",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Nagamandala.jpg/1280px-Nagamandala.jpg",
+    "width": 1200,
+    "height": 900,
+    "variants": [
+      {
+        "src": "/images/nagamandala.jpg",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "src": "/images/nagamandala-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "bengaluru-karaga",
+    "title": "Poo Karaga making a final round.JPG",
+    "local": "/images/bengaluru-karaga.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Poo_Karaga_making_a_final_round.JPG",
+    "creator": "Author & Photographer Source:Thigala4u alias Shri from Thigalarapete, Bangalore, India Author has allowed image to be used on Wikipedia under creative Commons attribution. Please follow link and read authors comments.",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Poo_Karaga_making_a_final_round.JPG",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Poo_Karaga_making_a_final_round.JPG/1280px-Poo_Karaga_making_a_final_round.JPG",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "src": "/images/bengaluru-karaga.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/bengaluru-karaga-640.jpg",
+        "width": 640,
+        "height": 426
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "gaarudi-gombe",
+    "title": "Gaarudi Gombe 03.JPG",
+    "local": "/images/gaarudi-gombe.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Gaarudi_Gombe_03.JPG",
+    "creator": "Pavanaja",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/2/22/Gaarudi_Gombe_03.JPG",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/Gaarudi_Gombe_03.JPG/1280px-Gaarudi_Gombe_03.JPG",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "src": "/images/gaarudi-gombe.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/gaarudi-gombe-640.jpg",
+        "width": 640,
+        "height": 426
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "sootrada-gombeyata",
+    "title": "Yakshagana Gombeyata Part - 5.webm",
+    "local": "/images/sootrada-gombeyata.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Yakshagana_Gombeyata_Part_-_5.webm",
+    "creator": "Krishnaiah S A",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceVideo": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Yakshagana_Gombeyata_Part_-_5.webm",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Yakshagana_Gombeyata_Part_-_5.webm/1280px--Yakshagana_Gombeyata_Part_-_5.webm.jpg",
+    "width": 1200,
+    "height": 682,
+    "variants": [
+      {
+        "src": "/images/sootrada-gombeyata.jpg",
+        "width": 1200,
+        "height": 682
+      },
+      {
+        "src": "/images/sootrada-gombeyata-640.jpg",
+        "width": 640,
+        "height": 364
+      }
+    ],
+    "note": "Poster still from the linked documentary video. Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "hase-chittara",
+    "title": "Chittara art.png",
+    "local": "/images/hase-chittara.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Chittara_art.png",
+    "creator": "2240460veena",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "downloadedFrom": "https://upload.wikimedia.org/wikipedia/commons/1/11/Chittara_art.png",
+    "width": 537,
+    "height": 362,
+    "variants": [
+      {
+        "src": "/images/hase-chittara.jpg",
+        "width": 537,
+        "height": 362
+      },
+      {
+        "src": "/images/hase-chittara-640.jpg",
+        "width": 537,
+        "height": 362
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "instrument-chande",
+    "title": "Chandeboy.jpg",
+    "local": "/images/instrument-chande.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Chandeboy.jpg",
+    "creator": "Raguks",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Chandeboy.jpg",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Chandeboy.jpg/1280px-Chandeboy.jpg",
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/images/instrument-chande.jpg",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/instrument-chande-640.jpg",
+        "width": 640,
+        "height": 854
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "instrument-maddale",
+    "title": "Maddale.jpg",
+    "local": "/images/instrument-maddale.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Maddale.jpg",
+    "creator": "Ragu Kattinakere",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/9/99/Maddale.jpg",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Maddale.jpg/1280px-Maddale.jpg",
+    "width": 1200,
+    "height": 900,
+    "variants": [
+      {
+        "src": "/images/instrument-maddale.jpg",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "src": "/images/instrument-maddale-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "instrument-tamate",
+    "title": "Sooliga Tribes Kurukshetra Tamate.webm",
+    "local": "/images/instrument-tamate.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Sooliga_Tribes_Kurukshetra_Tamate.webm",
+    "creator": "Krishnaiah S A",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceVideo": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Sooliga_Tribes_Kurukshetra_Tamate.webm",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Sooliga_Tribes_Kurukshetra_Tamate.webm/960px--Sooliga_Tribes_Kurukshetra_Tamate.webm.jpg",
+    "width": 960,
+    "height": 705,
+    "variants": [
+      {
+        "src": "/images/instrument-tamate.jpg",
+        "width": 960,
+        "height": 705
+      },
+      {
+        "src": "/images/instrument-tamate-640.jpg",
+        "width": 640,
+        "height": 470
+      }
+    ],
+    "note": "Poster still from the linked documentary video. Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "instrument-kinnari",
+    "title": "Kinnari string musical instrument.jpg",
+    "local": "/images/instrument-kinnari.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kinnari_string_musical_instrument.jpg",
+    "creator": "Venkatarangan Thirumalai",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Kinnari_string_musical_instrument.jpg",
+    "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Kinnari_string_musical_instrument.jpg/1280px-Kinnari_string_musical_instrument.jpg",
+    "width": 1200,
+    "height": 938,
+    "variants": [
+      {
+        "src": "/images/instrument-kinnari.jpg",
+        "width": 1200,
+        "height": 938
+      },
+      {
+        "src": "/images/instrument-kinnari-640.jpg",
+        "width": 640,
+        "height": 500
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "instrument-pillangovi",
+    "title": "Bansuri bamboo flute 23inch.jpg",
+    "local": "/images/instrument-pillangovi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bansuri_bamboo_flute_23inch.jpg",
+    "creator": "Betelgeuse",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "downloadedFrom": "https://upload.wikimedia.org/wikipedia/commons/0/02/Bansuri_bamboo_flute_23inch.jpg",
+    "width": 800,
+    "height": 401,
+    "variants": [
+      {
+        "src": "/images/instrument-pillangovi.jpg",
+        "width": 800,
+        "height": 401
+      },
+      {
+        "src": "/images/instrument-pillangovi-640.jpg",
+        "width": 640,
+        "height": 321
+      }
+    ],
+    "note": "Resized for web display without upscaling. CSS display crops vary by screen. Derivatives retain the linked source license."
+  },
+  {
+    "id": "krishna-parijatha",
+    "title": "Krishna-themed stage reference selected by the Trust",
+    "local": "/images/krishna-parijatha.jpg",
+    "source": "https://i.ytimg.com/vi/6-reLQNXTlA/sddefault.jpg",
+    "rightsType": "user-supplied",
+    "license": "User-selected image; no public reuse license asserted",
+    "note": "Exact YouTube thumbnail selected by the user for this entry. Original creator and public reuse permission have not been independently established.",
+    "width": 640,
+    "height": 480,
+    "variants": [
+      {
+        "src": "/images/krishna-parijatha.jpg",
+        "width": 640,
+        "height": 480
+      },
+      {
+        "src": "/images/krishna-parijatha-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ]
+  },
+  {
+    "id": "sannata-bayalata",
+    "title": "Bayalata stage reference selected by the Trust",
+    "local": "/images/sannata-bayalata.jpg",
+    "source": "https://i.ytimg.com/vi/q4TekMXDHK4/maxresdefault.jpg",
+    "rightsType": "user-supplied",
+    "license": "User-selected image; no public reuse license asserted",
+    "note": "Exact YouTube thumbnail selected by the user for this entry. Original creator and public reuse permission have not been independently established.",
+    "width": 1200,
+    "height": 675,
+    "variants": [
+      {
+        "src": "/images/sannata-bayalata.jpg",
+        "width": 1200,
+        "height": 675
+      },
+      {
+        "src": "/images/sannata-bayalata-640.jpg",
+        "width": 640,
+        "height": 360
+      }
+    ]
   }
 ]
