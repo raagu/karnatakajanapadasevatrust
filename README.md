@@ -28,12 +28,16 @@ Upload the contents of `dist/` to a static web host, or import the repository in
 
 The repository includes `.github/workflows/pages.yml`. It tests the source and a production build served under `/karnatakajanapadasevatrust/`, then builds and publishes only `dist/`. Deployment runs automatically on pushes to `main`, or manually from the Actions tab. The workflow reads the actual public address from GitHub Pages settings, so a future custom domain does not require hardcoded source changes. Official GitHub Actions are pinned to release commit hashes; update these pins when upgrading them.
 
+The workflow uses the explicit `ubuntu-24.04` runner and Node24-compatible Pages actions. The website build continues to use Node22. These are separate runtimes: changing the website's `node-version` does not update the runtime bundled into an action. Artifact upload includes hidden public files so `.nojekyll` is retained.
+
 One-time setup by the repository owner:
 
 1. In `raagu/karnatakajanapadasevatrust`, open **Settings → Pages**.
 2. Under **Build and deployment → Source**, select **GitHub Actions**.
 3. Push the updated source, including the workflow, to `main`. If the workflow was pushed before enabling Pages, rerun it from **Actions → Deploy website to GitHub Pages → Run workflow**, choosing `main`.
 4. Wait for both the build and deployment jobs to succeed. Open the published address shown in **Settings → Pages**.
+
+If the live address displays this README, check **Source** first: it must say **GitHub Actions**, not **Deploy from a branch → main → /(root)**. Branch publishing and the custom workflow can otherwise both publish to the same address. The workflow now checks this setting before building and stops with an explicit instruction if it is still set to branch publishing. After changing the setting, run **Deploy website to GitHub Pages** again. An earlier README response may remain cached for up to ten minutes; use a hard refresh or a private browser window after deployment finishes. Node runtime deprecation and runner migration warnings are separate from the choice of files being published.
 
 The expected default address is https://raagu.github.io/karnatakajanapadasevatrust/. The source does not need to move into the repository root or a `/docs` folder, and generated `dist/` files remain ignored by Git. No personal access token or deployment secret is required; deployment uses GitHub's short-lived workflow token. `public/.nojekyll` is also included in the build to identify it as prebuilt static content.
 
