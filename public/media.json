@@ -1,0 +1,629 @@
+[
+  {
+    "id": "dollu-kunitha",
+    "title": "Dollu Kunita.jpg",
+    "local": "/images/dollu.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Dollu_Kunita.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/19/Dollu_Kunita.jpg",
+    "creator": "Shivaprasad Haluvalli",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 802,
+    "note": "Resized for web display. CSS display crops vary by screen. Resized photographs retain the linked source license.",
+    "variants": [
+      {
+        "src": "/images/dollu.jpg",
+        "width": 1200,
+        "height": 802
+      },
+      {
+        "src": "/images/dollu-640.jpg",
+        "width": 640,
+        "height": 428
+      }
+    ]
+  },
+  {
+    "id": "yakshagana",
+    "title": "Yakshagana on stage.jpg",
+    "local": "/images/yakshagana.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Yakshagana_on_stage.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Yakshagana_on_stage.jpg",
+    "creator": "Sandeep Kasaragod",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 2132,
+    "note": "Resized for web display. CSS display crops vary by screen. Resized photographs retain the linked source license.",
+    "variants": [
+      {
+        "src": "/images/yakshagana.jpg",
+        "width": 1200,
+        "height": 2132
+      },
+      {
+        "src": "/images/yakshagana-640.jpg",
+        "width": 640,
+        "height": 1137
+      }
+    ]
+  },
+  {
+    "id": "kamsale",
+    "title": "Beesu Kamsale 01.JPG",
+    "local": "/images/kamsale.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Beesu_Kamsale_01.JPG",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/72/Beesu_Kamsale_01.JPG",
+    "creator": "Pavanaja",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 800,
+    "note": "Resized for web display. CSS display crops vary by screen. Resized photographs retain the linked source license.",
+    "variants": [
+      {
+        "src": "/images/kamsale.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/kamsale-640.jpg",
+        "width": 640,
+        "height": 427
+      }
+    ]
+  },
+  {
+    "id": "togalu-gombeyaata",
+    "title": "Togalu Gombeyaata by Belagallu Veeranna Troupe.jpg",
+    "local": "/images/puppetry.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Togalu_Gombeyaata_by_Belagallu_Veeranna_Troupe.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/4/45/Togalu_Gombeyaata_by_Belagallu_Veeranna_Troupe.jpg",
+    "creator": "Kalamshu Trust",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 800,
+    "note": "Resized for web display. CSS display crops vary by screen. Resized photographs retain the linked source license.",
+    "variants": [
+      {
+        "src": "/images/puppetry.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/puppetry-640.jpg",
+        "width": 640,
+        "height": 427
+      }
+    ]
+  },
+  {
+    "id": "folk-songs",
+    "title": "Janapada song 3 recording in field.jpg",
+    "local": "/images/songs.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Janapada_song_3_recording_in_field.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Janapada_song_3_recording_in_field.jpg",
+    "creator": "Santhosh Notagar99",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 1200,
+    "height": 901,
+    "note": "Resized for web display. CSS display crops vary by screen. Resized photographs retain the linked source license.",
+    "variants": [
+      {
+        "src": "/images/songs.jpg",
+        "width": 1200,
+        "height": 901
+      },
+      {
+        "src": "/images/songs-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ]
+  },
+  {
+    "id": "yakshagana-hero",
+    "title": "A character in Yaksha Gaana performance.jpg",
+    "local": "/images/yakshagana-hero.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:A_character_in_Yaksha_Gaana_performance.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/a/a3/A_character_in_Yaksha_Gaana_performance.jpg",
+    "creator": "Krishnamoorthy Sudhakar",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1600,
+    "height": 1067,
+    "note": "Resized for web display. CSS display crops vary by screen. The social-card.jpg derivative is cropped to 1200 × 630. All derivatives retain CC BY-SA 4.0.",
+    "variants": [
+      {
+        "src": "/images/yakshagana-hero.jpg",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/yakshagana-hero-800.jpg",
+        "width": 800,
+        "height": 533
+      }
+    ]
+  },
+  {
+    "id": "president",
+    "title": "T.A. Narayana Gowda (2025).jpg",
+    "local": "/images/president.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:T.A._Narayana_Gowda_(2025).jpg",
+    "creator": "Vishwavani TV",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "width": 472,
+    "height": 563,
+    "note": "CSS display crops vary by screen. The photograph retains CC BY 3.0."
+  },
+  {
+    "id": "vice-president",
+    "title": "Hayath Kargal — portrait supplied for this website",
+    "local": "/images/vice-president.jpg",
+    "source": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPFND7RW-Df-MB7XkKP4jBWPXX4VRUgYLcx7P2qgfGTQ&s=10",
+    "creator": "Photographer not specified",
+    "rightsType": "user-supplied",
+    "rightsNote": "Image selected by the user for this website. No public reuse license is asserted.",
+    "width": 200,
+    "height": 200
+  },
+  {
+    "id": "suggi",
+    "title": "Halakki Suggi Kunitha 01.JPG",
+    "local": "/images/suggi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Halakki_Suggi_Kunitha_01.JPG",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Halakki_Suggi_Kunitha_01.JPG",
+    "creator": "Pavanaja",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "src": "/images/suggi.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/suggi-640.jpg",
+        "width": 640,
+        "height": 427
+      }
+    ],
+    "note": "Resized for web display. CSS display crops vary by screen. Resized photographs retain the linked source license."
+  },
+  {
+    "id": "somana",
+    "title": "Somana Kunitha 01.JPG",
+    "local": "/images/somana.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Somana_Kunitha_01.JPG",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Somana_Kunitha_01.JPG",
+    "creator": "Pavanaja",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "src": "/images/somana.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/somana-640.jpg",
+        "width": 640,
+        "height": 427
+      }
+    ],
+    "note": "Resized for web display. CSS display crops vary by screen. Resized photographs retain the linked source license."
+  },
+  {
+    "id": "bidri",
+    "title": "Bidriware vases and decanter.jpg",
+    "local": "/images/bidri.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bidriware_vases_and_decanter.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Bidriware_vases_and_decanter.jpg",
+    "creator": "Randhirreddy at English Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "width": 1200,
+    "height": 900,
+    "variants": [
+      {
+        "src": "/images/bidri.jpg",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "src": "/images/bidri-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized from a Wikimedia thumbnail for web display. CSS display crops vary by screen. Resized photographs retain the linked source license."
+  },
+  {
+    "id": "channapatna",
+    "title": "Channapatna toys artists.jpg",
+    "local": "/images/channapatna.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Channapatna_toys_artists.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/3/32/Channapatna_toys_artists.jpg",
+    "creator": "KartikMistry",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "width": 1200,
+    "height": 900,
+    "variants": [
+      {
+        "src": "/images/channapatna.jpg",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "src": "/images/channapatna-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized from a Wikimedia thumbnail for web display. CSS display crops vary by screen. Resized photographs retain the linked source license."
+  },
+  {
+    "id": "huli",
+    "title": "Huli Vesha 04.JPG",
+    "local": "/images/huli.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Huli_Vesha_04.JPG",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/2/26/Huli_Vesha_04.JPG",
+    "creator": "Pavanaja",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "src": "/images/huli.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/huli-640.jpg",
+        "width": 640,
+        "height": 426
+      }
+    ],
+    "note": "Resized from a Wikimedia thumbnail for web display. CSS display crops vary by screen. Resized photographs retain the linked source license."
+  },
+  {
+    "id": "kasuti",
+    "title": "Kasuti of Karnataka.jpg",
+    "local": "/images/kasuti.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kasuti_of_Karnataka.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kasuti_of_Karnataka.jpg",
+    "creator": "தீப்தி செந்தில்",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/images/kasuti.jpg",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/kasuti-640.jpg",
+        "width": 640,
+        "height": 854
+      }
+    ],
+    "note": "Resized from a Wikimedia thumbnail for web display. CSS display crops vary by screen. Resized photographs retain the linked source license."
+  },
+  {
+    "title": "Dr. Malavalli Mahadevaswamy in Rangayana.jpg",
+    "local": "/images/oral-epics-photo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Dr._Malavalli_Mahadevaswamy_in_Rangayana.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/76/Dr._Malavalli_Mahadevaswamy_in_Rangayana.jpg",
+    "creator": "Sulsulemga",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "width": 1200,
+    "height": 1693,
+    "variants": [
+      {
+        "src": "/images/oral-epics-photo.jpg",
+        "width": 1200,
+        "height": 1693
+      },
+      {
+        "src": "/images/oral-epics-photo-640.jpg",
+        "width": 640,
+        "height": 903
+      }
+    ],
+    "note": "Resized for web; display crops may vary. Source license retained.",
+    "objectPosition": "50% 25%",
+    "id": "oral-epics-photo",
+    "verification": {
+      "commonsDescription": "Dr. Malavalli Mahadevaswamy in Rangayana",
+      "sourceWidth": 1571,
+      "sourceHeight": 2216,
+      "subjectContext": "Commons categorises the identified subject as a folk vocalist from Karnataka; the photograph shows him at Rangayana, not an identified epic recitation.",
+      "visuallyInspected": true
+    },
+    "captionType": "representative",
+    "enCaption": "Folk vocalist Dr. Malavalli Mahadevaswamy at Rangayana — a representative portrait for the oral-epic tradition.",
+    "knCaption": "ರಂಗಾಯಣದಲ್ಲಿ ಜನಪದ ಗಾಯಕ ಡಾ. ಮಳವಳ್ಳಿ ಮಹಾದೇವಸ್ವಾಮಿ — ಮೌಖಿಕ ಮಹಾಕಾವ್ಯ ಪರಂಪರೆಯ ಪ್ರಾತಿನಿಧಿಕ ಭಾವಚಿತ್ರ."
+  },
+  {
+    "title": "Janapada song recording.jpg",
+    "local": "/images/folk-tales-photo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Janapada_song_recording.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/15/Janapada_song_recording.jpg",
+    "creator": "Santhosh Notagar99",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 1200,
+    "height": 900,
+    "variants": [
+      {
+        "src": "/images/folk-tales-photo.jpg",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "src": "/images/folk-tales-photo-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized for web; CSS display crops may vary. Source license retained.",
+    "id": "folk-tales-photo",
+    "verification": {
+      "commonsDescription": "Janapada song",
+      "sourceWidth": 2500,
+      "sourceHeight": 1876,
+      "downloadedFrom": "https://upload.wikimedia.org/wikipedia/commons/1/15/Janapada_song_recording.jpg",
+      "visuallyInspected": true
+    },
+    "captionType": "representative",
+    "enCaption": "Folk-song field recording in Karnataka, used as a representative photograph of oral-heritage transmission.",
+    "knCaption": "ಕರ್ನಾಟಕದಲ್ಲಿ ಜನಪದ ಹಾಡಿನ ಕ್ಷೇತ್ರ ಧ್ವನಿಮುದ್ರಣ; ಮೌಖಿಕ ಪರಂಪರೆಯ ಪ್ರಸಾರವನ್ನು ಪ್ರತಿನಿಧಿಸುವ ಛಾಯಾಚಿತ್ರ."
+  },
+  {
+    "title": "Folk song recording in Badami.jpg",
+    "local": "/images/proverbs-photo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Folk_song_recording_in_Badami.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/8/89/Folk_song_recording_in_Badami.jpg",
+    "creator": "Santhosh Notagar99",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 1200,
+    "height": 1599,
+    "variants": [
+      {
+        "src": "/images/proverbs-photo.jpg",
+        "width": 1200,
+        "height": 1599
+      },
+      {
+        "src": "/images/proverbs-photo-640.jpg",
+        "width": 640,
+        "height": 853
+      }
+    ],
+    "note": "Resized for web; CSS display crops may vary. Source license retained.",
+    "id": "proverbs-photo",
+    "verification": {
+      "commonsDescription": "Folk song",
+      "sourceWidth": 1876,
+      "sourceHeight": 2500,
+      "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Folk_song_recording_in_Badami.jpg/1280px-Folk_song_recording_in_Badami.jpg",
+      "visuallyInspected": true
+    },
+    "captionType": "representative",
+    "enCaption": "Folk-song documentation in Badami, used as a representative oral-heritage photograph.",
+    "knCaption": "ಬಾದಾಮಿಯಲ್ಲಿ ಜನಪದ ಹಾಡಿನ ದಾಖಲಾತಿ; ಮೌಖಿಕ ಪರಂಪರೆಯ ಪ್ರಾತಿನಿಧಿಕ ಛಾಯಾಚಿತ್ರ."
+  },
+  {
+    "title": "Janadapada song 2 recording Badami group.jpg",
+    "local": "/images/riddles-photo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Janadapada_song_2_recording_Badami_group.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Janadapada_song_2_recording_Badami_group.jpg",
+    "creator": "Santhosh Notagar99",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 1200,
+    "height": 901,
+    "variants": [
+      {
+        "src": "/images/riddles-photo.jpg",
+        "width": 1200,
+        "height": 901
+      },
+      {
+        "src": "/images/riddles-photo-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized for web; CSS display crops may vary. Source license retained.",
+    "id": "riddles-photo",
+    "verification": {
+      "commonsDescription": "Bisukallu song",
+      "sourceWidth": 2500,
+      "sourceHeight": 1876,
+      "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Janadapada_song_2_recording_Badami_group.jpg/1280px-Janadapada_song_2_recording_Badami_group.jpg",
+      "visuallyInspected": true
+    },
+    "captionType": "representative",
+    "enCaption": "A group folk-song recording session in Badami, used as a representative oral-heritage context.",
+    "knCaption": "ಬಾದಾಮಿಯಲ್ಲಿ ಜನಪದ ಹಾಡಿನ ಸಮೂಹ ಧ್ವನಿಮುದ್ರಣ; ಮೌಖಿಕ ಪರಂಪರೆಯ ಪ್ರಾತಿನಿಧಿಕ ಸನ್ನಿವೇಶ."
+  },
+  {
+    "title": "Sobana Pada recording.jpg",
+    "local": "/images/sobane-photo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Sobana_Pada_recording.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/4/48/Sobana_Pada_recording.jpg",
+    "creator": "Santhosh Notagar99",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 1200,
+    "height": 900,
+    "variants": [
+      {
+        "src": "/images/sobane-photo.jpg",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "src": "/images/sobane-photo-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized for web; CSS display crops may vary. Source license retained.",
+    "id": "sobane-photo",
+    "verification": {
+      "commonsDescription": "Sobana Pada",
+      "sourceWidth": 2500,
+      "sourceHeight": 1876,
+      "downloadedFrom": "https://upload.wikimedia.org/wikipedia/commons/4/48/Sobana_Pada_recording.jpg",
+      "visuallyInspected": true
+    },
+    "captionType": "documentary",
+    "enCaption": "Sobana Pada field recording in Karnataka.",
+    "knCaption": "ಕರ್ನಾಟಕದಲ್ಲಿ ಸೋಬಾನೆ ಪದಗಳ ಕ್ಷೇತ್ರ ಧ್ವನಿಮುದ್ರಣ."
+  },
+  {
+    "title": "Chandagalu Borappa.jpg",
+    "local": "/images/tatvapada-photo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Chandagalu_Borappa.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/9/91/Chandagalu_Borappa.jpg",
+    "creator": "Msclrfl22",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/images/tatvapada-photo.jpg",
+        "width": 1200,
+        "height": 1024
+      },
+      {
+        "src": "/images/tatvapada-photo-640.jpg",
+        "width": 640,
+        "height": 546
+      }
+    ],
+    "note": "Resized for web; CSS display crops may vary. Source license retained.",
+    "id": "tatvapada-photo",
+    "verification": {
+      "commonsDescription": "Borappa addressing at the 1st Tathvapadakarara sammelana in Mandya held in 2012",
+      "sourceWidth": 1570,
+      "sourceHeight": 1339,
+      "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chandagalu_Borappa.jpg/1280px-Chandagalu_Borappa.jpg",
+      "visuallyInspected": true
+    },
+    "captionType": "documentary",
+    "enCaption": "Chandagalu Borappa addressing the first Tathvapadakarara Sammelana in Mandya, 2012.",
+    "knCaption": "2012ರಲ್ಲಿ ಮಂಡ್ಯದಲ್ಲಿ ನಡೆದ ಮೊದಲ ತತ್ವಪದಕಾರರ ಸಮ್ಮೇಳನದಲ್ಲಿ ಮಾತನಾಡುತ್ತಿರುವ ಚಂದಗಾಲು ಬೋರಪ್ಪ."
+  },
+  {
+    "title": "Bisukallu song recording.jpg",
+    "local": "/images/work-songs-photo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bisukallu_song_recording.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Bisukallu_song_recording.jpg",
+    "creator": "Santhosh Notagar99",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "width": 1200,
+    "height": 901,
+    "variants": [
+      {
+        "src": "/images/work-songs-photo.jpg",
+        "width": 1200,
+        "height": 901
+      },
+      {
+        "src": "/images/work-songs-photo-640.jpg",
+        "width": 640,
+        "height": 480
+      }
+    ],
+    "note": "Resized for web; CSS display crops may vary. Source license retained.",
+    "id": "work-songs-photo",
+    "verification": {
+      "commonsDescription": "Folk song",
+      "sourceWidth": 2500,
+      "sourceHeight": 1876,
+      "downloadedFrom": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Bisukallu_song_recording.jpg/1280px-Bisukallu_song_recording.jpg",
+      "visuallyInspected": true
+    },
+    "captionType": "documentary",
+    "enCaption": "Bisukallu grinding-song field recording in Karnataka.",
+    "knCaption": "ಕರ್ನಾಟಕದಲ್ಲಿ ಬೀಸುಕಲ್ಲಿನ ಪದಗಳ ಕ್ಷೇತ್ರ ಧ್ವನಿಮುದ್ರಣ."
+  },
+  {
+    "title": "Wooden sculpture of goddess at Zapurza Museum of Art & Culture.jpg",
+    "local": "/images/kinhal-authentic.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Wooden_sculpture_of_goddess_at_Zapurza_Museum_of_Art_%26_Culture.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/9/98/Wooden_sculpture_of_goddess_at_Zapurza_Museum_of_Art_%26_Culture.jpg",
+    "creator": "DesiBoy101",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/images/kinhal-authentic.jpg",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/kinhal-authentic-640.jpg",
+        "width": 640,
+        "height": 854
+      }
+    ],
+    "note": "Resized from licensed Wikimedia thumbnail; CSS display crops vary by screen. Original license retained.",
+    "id": "kinhal-authentic",
+    "verification": "Documentary photo of a joint Sawantwadi–Kinnal revival object, not evidence of an exclusively Kinnal historical object. Source description explicitly identifies the joint project. Visually inspected painted wooden goddess, no fruit-model substitution.",
+    "captionType": "representative",
+    "enCaption": "Goddess sculpture created through the Sawantwadi–Kinnal Woodcraft Revival Project; photographed at Zapurza Museum.",
+    "knCaption": "ಸಾವಂತವಾಡಿ–ಕಿನ್ನಾಳ ಮರಕುಶಲ ಪುನರುಜ್ಜೀವನ ಯೋಜನೆಯಲ್ಲಿ ರಚಿಸಿದ ದೇವಿ ಮೂರ್ತಿ; ಜಪುರಝಾ ವಸ್ತುಸಂಗ್ರಹಾಲಯದಲ್ಲಿ ತೆಗೆದ ಛಾಯಾಚಿತ್ರ."
+  },
+  {
+    "title": "8.Men Perforning a Tribal Dance Veeragase.jpg",
+    "local": "/images/veeragase-authentic.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:8.Men_Perforning_a_Tribal_Dance_Veeragase.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/2/27/8.Men_Perforning_a_Tribal_Dance_Veeragase.jpg",
+    "creator": "MaximusPrasad",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "src": "/images/veeragase-authentic.jpg",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "src": "/images/veeragase-authentic-640.jpg",
+        "width": 640,
+        "height": 426
+      }
+    ],
+    "note": "Resized from licensed Wikimedia thumbnail; CSS display crops vary by screen. Original license retained.",
+    "id": "veeragase-authentic",
+    "verification": "Commons description explicitly identifies Veeragase, with camera metadata dated 8 February 2024. Visually inspected real performers in red/gold headdresses and ceremonial ornaments.",
+    "captionType": "documentary",
+    "enCaption": "Veeragase performers in a documented festival procession, photographed in February 2024.",
+    "knCaption": "2024ರ ಫೆಬ್ರವರಿಯಲ್ಲಿ ದಾಖಲಿಸಿದ ಉತ್ಸವದ ಮೆರವಣಿಗೆಯಲ್ಲಿರುವ ವೀರಗಾಸೆ ಕಲಾವಿದರು."
+  }
+]

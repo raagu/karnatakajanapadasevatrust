@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+*.tar.gz
+test-results/
+playwright-report/
+__pycache__/
+*.pyc
+artifacts/
+.openai/
+.env
+.env.*
+!.env.example
