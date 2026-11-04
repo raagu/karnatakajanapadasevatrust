@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { chromium, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { galleryEntries } from "../public/content.js";
+import { browserOptions } from "./browser-options.mjs";
 
 test('returning to the hero clears a previously highlighted section', async () => {
   await withPage({width:1440,height:1000}, async page => {
@@ -26,12 +27,7 @@ const baseURL = process.env.TEST_BASE_URL || "http://127.0.0.1:4173";
 let browser;
 
 before(async () => {
-  browser = await chromium.launch({
-    executablePath:
-      process.env.CHROME_PATH ||
-      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    headless: true,
-  });
+  browser = await chromium.launch(browserOptions);
 });
 after(async () => {
   await browser?.close();
@@ -324,7 +320,7 @@ test("displayed local images and gallery modal images load successfully", async 
       const entry = galleryEntries.find((item) => item.id === id);
       await trigger.click();
       const photo = page.locator("#site-dialog .dialog-photo");
-      await expect(photo).toHaveAttribute("src", entry.imageSrc);
+      await expect(photo).toHaveJSProperty("src", new URL(entry.imageSrc.slice(1), baseURL).href);
       assert.match(await photo.getAttribute("src"), /\.jpe?g$/i);
       await expect
         .poll(() =>
@@ -1075,14 +1071,14 @@ test("every gallery and detail image is a photograph and Kinnal context is visib
       await card.scrollIntoViewIfNeeded();
       await expect(card.locator("img")).toHaveAttribute(
         "src",
-        "/images/kinhal-authentic.jpg",
+        "./images/kinhal-authentic.jpg",
       );
       await expect(card).toContainText(entry.photoCaption[language]);
       await card.locator('[data-art-open="kinhal"]').click();
       const dialog = page.locator("#site-dialog");
       await expect(dialog.locator(".dialog-photo")).toHaveAttribute(
         "src",
-        "/images/kinhal-authentic.jpg",
+        "./images/kinhal-authentic.jpg",
       );
       await expect(dialog).toContainText(entry.photoCaption[language]);
       await dialog.locator("#art-credit").scrollIntoViewIfNeeded();

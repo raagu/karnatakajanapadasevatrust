@@ -20,11 +20,34 @@ Open http://127.0.0.1:4173. The `public/` directory is the complete website. Ser
 SITE_URL=https://your-confirmed-domain.example npm run build
 ```
 
-Replace the example with the actual HTTPS origin. This adds the canonical URL, absolute social image URLs, organization URL and sitemap. Without `SITE_URL`, the build deliberately omits canonical and sitemap URLs rather than inventing a domain.
+Replace the example with the actual HTTPS website URL, including its directory when hosted as a GitHub Pages project. A trailing slash is normalized automatically. This adds the canonical URL, absolute social image URLs, organization URL and sitemap. Credentials, query strings and fragments are rejected. Without `SITE_URL`, the build deliberately omits canonical and sitemap URLs rather than inventing a domain.
 
-Upload the contents of `dist/` to a static web host, or import the repository into Netlify or Vercel using the included configuration. Set `SITE_URL` in that host's build environment. The build has no production package dependencies. `_headers` configures security headers on compatible static hosts; `vercel.json` configures the same headers on Vercel. Other hosts must configure equivalent headers themselves.
+Upload the contents of `dist/` to a static web host, or import the repository into Netlify or Vercel using the included configuration. Set `SITE_URL` in that host's build environment. The build has no production package dependencies. Assets use relative paths so the website works both at a domain root and inside a project directory.
 
-Hosted publication through the connected Sites service was unavailable in this workspace. No hosted deployment was created.
+### GitHub Pages
+
+The repository includes `.github/workflows/pages.yml`. It tests the source and a production build served under `/karnatakajanapadasevatrust/`, then builds and publishes only `dist/`. Deployment runs automatically on pushes to `main`, or manually from the Actions tab. The workflow reads the actual public address from GitHub Pages settings, so a future custom domain does not require hardcoded source changes. Official GitHub Actions are pinned to release commit hashes; update these pins when upgrading them.
+
+One-time setup by the repository owner:
+
+1. In `raagu/karnatakajanapadasevatrust`, open **Settings → Pages**.
+2. Under **Build and deployment → Source**, select **GitHub Actions**.
+3. Push the updated source, including the workflow, to `main`. If the workflow was pushed before enabling Pages, rerun it from **Actions → Deploy website to GitHub Pages → Run workflow**, choosing `main`.
+4. Wait for both the build and deployment jobs to succeed. Open the published address shown in **Settings → Pages**.
+
+The expected default address is https://raagu.github.io/karnatakajanapadasevatrust/. The source does not need to move into the repository root or a `/docs` folder, and generated `dist/` files remain ignored by Git. No personal access token or deployment secret is required; deployment uses GitHub's short-lived workflow token. `public/.nojekyll` is also included in the build to identify it as prebuilt static content.
+
+To reproduce the configured build locally:
+
+```sh
+SITE_URL=https://raagu.github.io/karnatakajanapadasevatrust/ npm run build
+```
+
+The sitemap is served at the website's `sitemap.xml` address. Search engines only recognize `robots.txt` at a host's root, so the copy inside a Pages project directory does not control crawling; submit the project sitemap directly if needed.
+
+`_headers` configures security headers on compatible static hosts; `vercel.json` configures those headers on Vercel. GitHub Pages does not apply these files. An HTML Content Security Policy and referrer policy preserve the controls that browsers support through metadata. Header-only controls such as `frame-ancestors`, `X-Frame-Options`, and `Permissions-Policy` require a host or proxy that can set HTTP headers; they are not asserted for GitHub Pages.
+
+To roll back, revert the source commit on `main`; the workflow will test and redeploy that version. This setup alone does not enable Pages or confirm a live deployment.
 
 ## Content and assets
 
@@ -66,7 +89,7 @@ npm run dev
 npm test
 ```
 
-Browser tests use installed Google Chrome by default. Set `CHROME_PATH` for another Chromium executable and `TEST_BASE_URL` for another running server. They cover keyboard use, dialogs, mobile navigation, overlapping regional filters, validation and encoding of WhatsApp drafts, responsive overflow, image loading and automated WCAG checks. Tests intercept WhatsApp actions and do not send messages. Automated accessibility checks complement manual visual and keyboard review; they do not establish full compliance.
+Browser tests use installed Google Chrome on macOS and Playwright's Chromium on other systems. On Linux, install the test browser with `npx playwright install --with-deps chromium` after `npm ci`. Set `CHROME_PATH` for another Chromium executable and `TEST_BASE_URL` for another running server. They cover keyboard use, dialogs, mobile navigation, overlapping regional filters, validation and encoding of WhatsApp drafts, responsive overflow, image loading and automated WCAG checks. Tests intercept WhatsApp actions and do not send messages. Automated accessibility checks complement manual visual and keyboard review; they do not establish full compliance.
 
 Locale checks cover the Kannada default, exact Trust spelling, fully translated visible copy and accessible labels, English preference persistence, live form switching, Kannada message drafts, metadata and responsive layouts. Gallery checks cover real JPEG file signatures, photo provenance, exact card/dialog assets, Kinnal context captions, bilingual search, combined filters, shortcuts, empty states, image recovery, the complete leadership card and static build controls. Optional media-maintenance tests can be run with `python -m unittest discover -s tests -p 'test_refresh_media.py'` in an environment containing Pillow.
 

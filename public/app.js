@@ -12,7 +12,7 @@ import {
   matchesTradition,
   createEnquiryUrl,
 } from "./content.js";
-import { galleryLabels } from "./gallery.js";
+import { assetPath, galleryLabels } from "./gallery.js";
 
 const dialog = document.querySelector("#site-dialog");
 const dialogContent = document.querySelector("#dialog-content");
@@ -47,7 +47,7 @@ function creditLine(item) {
 
 async function getCredits() {
   if (credits) return credits;
-  const response = await fetch("/media.json");
+  const response = await fetch("./media.json");
   if (!response.ok) throw new Error("Image credits could not be loaded.");
   credits = await response.json();
   return credits;
@@ -58,7 +58,7 @@ function showArt(id, trigger) {
   if (!art) return;
   const entry = galleryEntries.find((item) => item.id === id);
   showDialog(
-    `<figure class="dialog-media"><img class="dialog-photo photo-${id}${entry.photoFit === "contain" ? " photo-contain" : ""}" src="${text(entry.imageSrc)}" width="1200" height="800" alt="${text(entry.en.alt)}">${entry.photoCaption.en ? `<figcaption class="dialog-photo-caption"><strong>Photo context</strong>: <span class="dialog-photo-caption-copy">${text(entry.photoCaption.en)}</span></figcaption>` : ""}</figure><div class="dialog-inner"><div class="dialog-category">${text(categories.find((category) => category.id === entry.category).en)}</div><p class="eyebrow">${text(art.region)}</p><h2 id="dialog-title">${text(art.name)}</h2><h3>Roots & region</h3><p>${text(art.origin)}</p><h3>Why it matters</h3><p>${text(art.importance)}</p><p class="source-note">Learn more: <a href="${art.source}" target="_blank" rel="noopener noreferrer">${art.sourceName} ↗</a></p><p class="source-note" id="art-credit">${art.illustrated ? "Original illustration created for this website." : 'Photo attribution: <a href="/media.json" target="_blank" rel="noopener noreferrer">view the image credit register</a>.'}</p></div>`,
+    `<figure class="dialog-media"><img class="dialog-photo photo-${id}${entry.photoFit === "contain" ? " photo-contain" : ""}" src="${text(assetPath(entry.imageSrc))}" width="1200" height="800" alt="${text(entry.en.alt)}">${entry.photoCaption.en ? `<figcaption class="dialog-photo-caption"><strong>Photo context</strong>: <span class="dialog-photo-caption-copy">${text(entry.photoCaption.en)}</span></figcaption>` : ""}</figure><div class="dialog-inner"><div class="dialog-category">${text(categories.find((category) => category.id === entry.category).en)}</div><p class="eyebrow">${text(art.region)}</p><h2 id="dialog-title">${text(art.name)}</h2><h3>Roots & region</h3><p>${text(art.origin)}</p><h3>Why it matters</h3><p>${text(art.importance)}</p><p class="source-note">Learn more: <a href="${art.source}" target="_blank" rel="noopener noreferrer">${art.sourceName} ↗</a></p><p class="source-note" id="art-credit">${art.illustrated ? "Original illustration created for this website." : 'Photo attribution: <a href="./media.json" target="_blank" rel="noopener noreferrer">view the image credit register</a>.'}</p></div>`,
     trigger,
   );
   dialog.dataset.artId = id;
@@ -128,7 +128,7 @@ async function showCredits(trigger) {
     const status = dialog.querySelector("#credits-status");
     if (status)
       status.innerHTML =
-        'Image credits could not be loaded. <a href="/media.json" target="_blank" rel="noopener noreferrer">Open the credit register</a> or try again.';
+        'Image credits could not be loaded. <a href="./media.json" target="_blank" rel="noopener noreferrer">Open the credit register</a> or try again.';
     localizeDynamic(dialogContent);
   }
 }
@@ -347,6 +347,7 @@ function recoverPhoto(img) {
     img.id === "hero-photo" ? "/images/yakshagana-hero-800.jpg" : null,
   ]
     .filter(Boolean)
+    .map(assetPath)
     .find((url) => new URL(url, location.href).href !== failed);
   if (backup && !img.dataset.recoveryAttempted) {
     img.dataset.recoveryAttempted = "true";

@@ -1,27 +1,33 @@
 import { cp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
-import { renderHeritageHTML } from "../public/gallery.js";
+import { escapeHTML, renderHeritageHTML } from "../public/gallery.js";
 
 const root = path.resolve(import.meta.dirname, "..");
-let origin = process.env.SITE_URL;
+let siteURL = process.env.SITE_URL;
 try {
   const hosting = JSON.parse(
     await readFile(path.join(root, ".openai/hosting.json"), "utf8"),
   );
-  origin ||= hosting.expected_url;
+  siteURL ||= hosting.expected_url;
 } catch (error) {
   if (error.code !== "ENOENT") throw error;
 }
-if (origin) {
-  const url = new URL(origin);
+if (siteURL) {
+  const url = new URL(siteURL);
   if (
     url.protocol !== "https:" ||
     url.username ||
     url.password ||
-    url.pathname !== "/"
+    url.search ||
+    url.hash
   )
-    throw new Error("SITE_URL must be a plain HTTPS origin.");
-  origin = url.origin;
+    throw new Error(
+      "SITE_URL must be an HTTPS site URL without credentials, a query or a fragment.",
+    );
+  url.pathname = `${url.pathname.replace(/\/+$/, "")}/`;
+  url.search = "";
+  url.hash = "";
+  siteURL = url.href;
 }
 await rm(path.join(root, "dist"), { recursive: true, force: true });
 await mkdir(path.join(root, "dist"), { recursive: true });
@@ -30,15 +36,16 @@ await cp(path.join(root, "public"), path.join(root, "dist"), {
 });
 let html = await readFile(path.join(root, "dist/index.html"), "utf8");
 html = renderHeritageHTML(html);
-if (origin) {
+if (siteURL) {
+  const socialImageURL = new URL("images/social-card.jpg", siteURL).href;
   html = html
     .replace(
       "</head>",
-      `  <link rel="canonical" href="${origin}/">\n  <meta property="og:url" content="${origin}/">\n</head>`,
+      `  <link rel="canonical" href="${escapeHTML(siteURL)}">\n  <meta property="og:url" content="${escapeHTML(siteURL)}">\n</head>`,
     )
     .replaceAll(
-      'content="/images/social-card.jpg"',
-      `content="${origin}/images/social-card.jpg"`,
+      'content="./images/social-card.jpg"',
+      `content="${escapeHTML(socialImageURL)}"`,
     );
   const schemaPattern =
     /(<script type="application\/ld\+json" id="organization-schema">)(.*?)(<\/script>)/s;
@@ -51,21 +58,21 @@ if (origin) {
       open +
       JSON.stringify({
         ...JSON.parse(data),
-        url: `${origin}/`,
-        image: `${origin}/images/social-card.jpg`,
+        url: siteURL,
+        image: socialImageURL,
       }) +
       close,
   );
   await writeFile(
     path.join(root, "dist/sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${origin}/</loc></url></urlset>\n`,
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${escapeHTML(siteURL)}</loc></url></urlset>\n`,
   );
 }
 await writeFile(path.join(root, "dist/index.html"), html);
 await writeFile(
   path.join(root, "dist/robots.txt"),
-  `User-agent: *\nAllow: /\n${origin ? `Sitemap: ${origin}/sitemap.xml\n` : ""}`,
+  `User-agent: *\nAllow: /\n${siteURL ? `Sitemap: ${new URL("sitemap.xml", siteURL).href}\n` : ""}`,
 );
 console.log(
-  `Built static website in dist/${origin ? ` for ${origin}` : " (set SITE_URL for canonical URL and sitemap)"}.`,
+  `Built static website in dist/${siteURL ? ` for ${siteURL}` : " (set SITE_URL for canonical URL and sitemap)"}.`,
 );

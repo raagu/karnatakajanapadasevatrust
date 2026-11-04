@@ -1,5 +1,8 @@
 import { galleryEntries, categories } from "./content.js";
 
+// Keep local assets inside the site's directory, including on project Pages URLs.
+export const assetPath = (value) => value.replace(/^\/(?!\/)/, "./");
+
 export const galleryLabels = {
   en: {
     group: "Choose your interest",
@@ -76,10 +79,10 @@ export function renderGallery(language = "kn") {
         (category) => category.id === entry.category,
       );
       const responsive = entry.smallImageSrc
-        ? `srcset="${escapeHTML(entry.smallImageSrc)} 640w, ${escapeHTML(entry.imageSrc)} 1200w" sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"`
+        ? `srcset="${escapeHTML(assetPath(entry.smallImageSrc))} 640w, ${escapeHTML(assetPath(entry.imageSrc))} 1200w" sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"`
         : "";
       const photoClass = ` class="art-photo photo-${entry.id}${entry.photoFit === "contain" ? " photo-contain" : ""}"`;
-      return `<article class="art-card" data-regions="${entry.regions.join(" ")}" data-category-card="${entry.category}" data-art="${entry.id}"><button type="button" class="art-open" data-art-open="${entry.id}" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="art-image"><img${photoClass} src="${escapeHTML(entry.imageSrc)}" ${responsive} width="1200" height="800" alt="${escapeHTML(copy.alt)}" loading="lazy"><span class="art-category-badge">${escapeHTML(categoryShort[entry.category][language])}</span><span class="art-arrow" aria-hidden="true">↗</span></div><div class="art-body"><p class="art-region">${escapeHTML(copy.region)}</p><h3>${escapeHTML(copy.name)}</h3><p class="art-summary">${escapeHTML(copy.summary)}</p><span class="art-cta">${labels.explore}<span aria-hidden="true">→</span></span></div></button>${entry.photoCaption[language] ? `<p class="art-photo-caption"><span data-i18n="gallery.contextPhoto">${labels.contextPhoto}</span>: <span class="photo-caption-copy">${escapeHTML(entry.photoCaption[language])}</span></p>` : ""}</article>`;
+      return `<article class="art-card" data-regions="${entry.regions.join(" ")}" data-category-card="${entry.category}" data-art="${entry.id}"><button type="button" class="art-open" data-art-open="${entry.id}" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="art-image"><img${photoClass} src="${escapeHTML(assetPath(entry.imageSrc))}" ${responsive} width="1200" height="800" alt="${escapeHTML(copy.alt)}" loading="lazy"><span class="art-category-badge">${escapeHTML(categoryShort[entry.category][language])}</span><span class="art-arrow" aria-hidden="true">↗</span></div><div class="art-body"><p class="art-region">${escapeHTML(copy.region)}</p><h3>${escapeHTML(copy.name)}</h3><p class="art-summary">${escapeHTML(copy.summary)}</p><span class="art-cta">${labels.explore}<span aria-hidden="true">→</span></span></div></button>${entry.photoCaption[language] ? `<p class="art-photo-caption"><span data-i18n="gallery.contextPhoto">${labels.contextPhoto}</span>: <span class="photo-caption-copy">${escapeHTML(entry.photoCaption[language])}</span></p>` : ""}</article>`;
     })
     .join(
       "",
@@ -115,7 +118,7 @@ export function renderShortcuts(language = "kn") {
       const entry = galleryEntries.find(
         (item) => item.id === samples[category.id],
       );
-      return `<a class="category-shortcut" href="#heritage" data-browse-category="${category.id}"><img src="${escapeHTML(entry.smallImageSrc || entry.imageSrc)}" width="640" height="420" loading="lazy" alt="${escapeHTML(entry[language].alt)}" data-shortcut-photo="${entry.id}"><div><span class="shortcut-count" data-shortcut-count="${category.id}">${galleryEntries.filter((entry) => entry.category === category.id).length} ${labels.traditions}</span><h3 data-i18n="shortcut.${category.id}">${category[language]}</h3><span class="shortcut-arrow" aria-hidden="true">↗</span></div></a>`;
+      return `<a class="category-shortcut" href="#heritage" data-browse-category="${category.id}"><img src="${escapeHTML(assetPath(entry.smallImageSrc || entry.imageSrc))}" width="640" height="420" loading="lazy" alt="${escapeHTML(entry[language].alt)}" data-shortcut-photo="${entry.id}"><div><span class="shortcut-count" data-shortcut-count="${category.id}">${galleryEntries.filter((entry) => entry.category === category.id).length} ${labels.traditions}</span><h3 data-i18n="shortcut.${category.id}">${category[language]}</h3><span class="shortcut-arrow" aria-hidden="true">↗</span></div></a>`;
     })
     .join("")}</div></section>`;
 }
