@@ -70,7 +70,6 @@ uiKannada.suppliedPortraitNote =
 const uiEnglish = {
   trustName: "Karnataka Janapada Seva Trust",
   presidentName: "T.A. Narayana Gowda",
-  vicePresidentName: "Hayath Kargal",
   closeDialog: "Close dialog",
   rootsHeading: "Roots & region",
   importanceHeading: "Why it matters",

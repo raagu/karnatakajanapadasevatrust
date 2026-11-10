@@ -41,7 +41,7 @@ function showDialog(content, trigger) {
 function creditLine(item) {
   if (!item) return "";
   if (item.rightsType === "user-supplied")
-    return `<a href="${text(item.source)}" target="_blank" rel="noopener noreferrer">${text(item.id === "vice-president" ? "Hayath Kargal" : galleryEntries.find((entry) => entry.mediaId === item.id)?.en.name || item.title)}</a> · <span>Image supplied for this website; photographer not specified. No public reuse license is asserted.</span>`;
+    return `<a href="${text(item.source)}" target="_blank" rel="noopener noreferrer">${text(galleryEntries.find((entry) => entry.mediaId === item.id)?.en.name || item.title)}</a> · <span>Image supplied for this website; photographer not specified. No public reuse license is asserted.</span>`;
   return `<a href="${text(item.source)}" target="_blank" rel="noopener noreferrer">${text(item.title)}</a> · ${text(item.creator)} · <a href="${text(item.licenseUrl)}" target="_blank" rel="noopener noreferrer">${text(item.license)}</a>. Images resized; displayed crops vary by screen.`;
 }
 
@@ -122,7 +122,7 @@ async function showCredits(trigger) {
     const items = await getCredits();
     if (!dialog.querySelector("#credits-status")) return;
     dialog.querySelector("#credits-status").outerHTML =
-      `<p>Each image record links to its source and states its reuse terms. Original creators retain their rights. Photographs and archival video stills are resized for this website; display crops vary by screen.</p><ul class="credit-list">${items.map((item) => `<li><strong>${text(item.id === "president" ? "T.A. Narayana Gowda" : item.id === "vice-president" ? "Hayath Kargal" : item.title)}</strong><p>${creditLine(item)}</p></li>`).join("")}</ul><p>Real photographs and documentary video stills illustrate the collection. Context captions identify representative images; user-selected images carry their own reuse notices.</p>`;
+      `<p>Each image record links to its source and states its reuse terms. Original creators retain their rights. Photographs and archival video stills are resized for this website; display crops vary by screen.</p><ul class="credit-list">${items.map((item) => `<li><strong>${text(item.id === "president" ? "T.A. Narayana Gowda" : item.title)}</strong><p>${creditLine(item)}</p></li>`).join("")}</ul><p>Real photographs and documentary video stills illustrate the collection. Context captions identify representative images; user-selected images carry their own reuse notices.</p>`;
     localizeDynamic(dialogContent);
   } catch {
     const status = dialog.querySelector("#credits-status");

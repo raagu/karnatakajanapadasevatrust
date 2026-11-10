@@ -214,7 +214,7 @@ test("photographs retain provenance while user-supplied media makes no Creative 
   }
   assert.ok(
     manifest.some((item) => item.rightsType === "user-supplied"),
-    "The provided Hayath Kargal image must record its user-supplied provenance.",
+    "User-selected theatre photographs must retain their supplied-image provenance.",
   );
   for (const item of manifest) {
     assert.ok(item.source && item.local);

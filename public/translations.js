@@ -615,34 +615,9 @@ export const messages = {
     kn: "ಕರ್ನಾಟಕದ ಜಾನಪದ ಪರಂಪರೆ ಮತ್ತು ಸಮುದಾಯದ ಕಲ್ಯಾಣದತ್ತ ಟ್ರಸ್ಟ್‌ನ ಬದ್ಧತೆಯನ್ನು ಮುನ್ನಡೆಸುತ್ತಿದ್ದಾರೆ.",
     html: false,
   },
-  "leader.vicePresident.name": {
-    en: "Hayath Kargal",
-    kn: "ಹಯಾತ್ ಕಾರ್ಗಲ್",
-    html: false,
-  },
-  "leader.vicePresident.role": {
-    en: "VICE-PRESIDENT",
-    kn: "ಉಪಾಧ್ಯಕ್ಷರು",
-    html: false,
-  },
-  "leader.vicePresident.trust": {
-    en: "Karnataka Janapada Seva Trust",
-    kn: "ಕರ್ನಾಟಕ ಜನಪದ ಸೇವಾ ಟ್ರಸ್ಟ್",
-    html: false,
-  },
-  "leader.vicePresident.description": {
-    en: "Supporting a shared vision of cultural preservation and service to the community.",
-    kn: "ಸಂಸ್ಕೃತಿಯ ಸಂರಕ್ಷಣೆ ಮತ್ತು ಸಮುದಾಯ ಸೇವೆಯ ಒಗ್ಗಟ್ಟಿನ ಆಶಯಕ್ಕೆ ಬೆಂಬಲವಾಗಿ ನಿಂತಿದ್ದಾರೆ.",
-    html: false,
-  },
   "leader.president.alt": {
     en: "T.A. Narayana Gowda - President",
     kn: "ಟಿ.ಎ. ನಾರಾಯಣ ಗೌಡ — ಅಧ್ಯಕ್ಷರು",
-    html: false,
-  },
-  "leader.vicePresident.alt": {
-    en: "Hayath Kargal - Vice President",
-    kn: "ಹಯಾತ್ ಕಾರ್ಗಲ್ — ಉಪಾಧ್ಯಕ್ಷರು",
     html: false,
   },
   "join.eyebrow": {
@@ -805,9 +780,7 @@ export const knArts = {
 export const uiKannada = {
   trustName: "ಕರ್ನಾಟಕ ಜನಪದ ಸೇವಾ ಟ್ರಸ್ಟ್",
   presidentName: "ಟಿ.ಎ. ನಾರಾಯಣ ಗೌಡ",
-  vicePresidentName: "ಹಯಾತ್ ಕಾರ್ಗಲ್",
   presidentRole: "ಅಧ್ಯಕ್ಷರು",
-  vicePresidentRole: "ಉಪಾಧ್ಯಕ್ಷರು",
   closeDialog: "ಮುಚ್ಚಿ",
   rootsHeading: "ನೆಲೆ ಮತ್ತು ಪ್ರದೇಶ",
   importanceHeading: "ಸಾಂಸ್ಕೃತಿಕ ಮಹತ್ವ",

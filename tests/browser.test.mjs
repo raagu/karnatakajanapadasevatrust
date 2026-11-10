@@ -485,7 +485,7 @@ async function untranslatedUI(page) {
     return values;
   });
   const properNames =
-    /Karnataka Janapada Seva Trust|T\.?\s?A\.?\s?Narayana Gowda|Hayath Kargal|Dollu Kunitha|Yakshagana|Veeragase|Kamsale|Togalu Gombeyaata|Janapada Geethegalu|Sobane Pada|WhatsApp|English|HK/gi;
+    /Karnataka Janapada Seva Trust|T\.?\s?A\.?\s?Narayana Gowda|Dollu Kunitha|Yakshagana|Veeragase|Kamsale|Togalu Gombeyaata|Janapada Geethegalu|Sobane Pada|WhatsApp|English/gi;
   return labels.filter((value) =>
     /[a-z]{2,}/i.test(value.replace(properNames, "")),
   );
@@ -952,33 +952,33 @@ test("switching language preserves the selected category and region", async () =
   });
 });
 
-test("the user-provided Hayath Kargal portrait replaces the awaiting-photo placeholder", async () => {
-  await withPage({ width: 1440, height: 1000 }, async (page) => {
-    const image = page.locator("#vice-president-photo");
-    await image.scrollIntoViewIfNeeded();
-    await expect(image).toHaveAttribute("src", /\.jpe?g$/i);
-    await expect
-      .poll(() =>
-        image.evaluate(
+test("leadership shows one president card with a loaded portrait in both languages", async () => {
+  for (const width of [320, 1440]) {
+    for (const language of ["kn", "en"]) {
+      await withPage({ width, height: 1000 }, async (page) => {
+        const leadership = page.locator("#leadership");
+        const card = leadership.locator(".leader-card");
+        await expect(card).toHaveCount(1);
+        await expect(card.getByRole("heading", { level: 3 })).toHaveText(
+          language === "kn" ? "ಟಿ.ಎ. ನಾರಾಯಣ ಗೌಡ" : "T.A. Narayana Gowda",
+        );
+        await expect(card.locator(".leader-role")).toHaveText(
+          language === "kn" ? "ಅಧ್ಯಕ್ಷರು" : "PRESIDENT",
+        );
+        await expect(card).toContainText(
+          language === "kn" ? officialKannadaName : "Karnataka Janapada Seva Trust",
+        );
+        const image = leadership.locator("img");
+        await expect(image).toHaveCount(1);
+        await image.scrollIntoViewIfNeeded();
+        await expect(image).toHaveAttribute("src", "./images/president.jpg");
+        await expect.poll(() => image.evaluate(
           (element) => element.complete && element.naturalWidth > 0,
-        ),
-      )
-      .toBe(true);
-    assert.equal(await image.getAttribute("data-fallback-applied"), null);
-    await expect(page.locator("#leadership")).not.toContainText(
-      /Portrait awaited|ಭಾವಚಿತ್ರ ನಿರೀಕ್ಷ/i,
-    );
-    assert.doesNotMatch(
-      await image.getAttribute("alt"),
-      /awaited|awaiting|ನಿರೀಕ್ಷ/i,
-    );
-    const card = page.locator(".leader-card:has(#vice-president-photo)");
-    await expect(
-      card.getByRole("heading", { name: "Hayath Kargal", exact: true }),
-    ).toBeVisible();
-    await expect(card.locator(".leader-role")).toHaveText(/VICE-PRESIDENT/i);
-    await expect(card).toContainText("Karnataka Janapada Seva Trust");
-  });
+        )).toBe(true);
+        assert.equal(await image.getAttribute("data-fallback-applied"), null);
+      }, { language });
+    }
+  }
 });
 
 test("search finds English and Kannada names regardless of the interface language", async () => {
@@ -1150,14 +1150,14 @@ test("the dedicated instrument section is accessible in both languages on deskto
   }
 });
 
-test("selected theatre photographs have their own translated credits rather than the leader portrait credit", async () => {
+test("selected theatre photographs retain their translated names and reuse notices", async () => {
   await withPage({ width: 1440, height: 1000 }, async (page) => {
     for (const id of ["krishna-parijatha", "sannata-bayalata"]) {
       const entry = galleryEntries.find((item) => item.id === id);
       await page.locator(`.art-card [data-art-open="${id}"]`).click();
       const credit = page.locator("#art-credit");
       await expect(credit).toContainText("No public reuse license is asserted");
-      await expect(credit).not.toContainText("Hayath Kargal");
+      await expect(credit.locator("a")).toHaveText(entry.en.name);
       await expect(page.locator(".dialog-photo-caption")).toContainText(entry.photoCaption.en);
       await page.locator('#site-dialog [data-language="kn"]').click();
       await expect(credit).toContainText("ಸಾರ್ವಜನಿಕ ಮರುಬಳಕೆಯ");
