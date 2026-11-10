@@ -101,6 +101,59 @@ test("configured and unconfigured builds produce truthful search metadata", asyn
   }
 });
 
+test("Pages workflow builds HTTPS metadata when Pages reports HTTP", async () => {
+  const workflow = await readFile(
+    new URL("../.github/workflows/pages.yml", import.meta.url),
+    "utf8",
+  );
+  const template = workflow.match(/^\s+SITE_URL:\s*(.+)$/m)?.[1];
+  assert.ok(template, "The Pages build must set SITE_URL.");
+  const scenarios = [
+    {
+      base_url: "http://karnatakajanapadasevatrust.org",
+      host: "karnatakajanapadasevatrust.org",
+      base_path: "",
+      expected: "https://karnatakajanapadasevatrust.org/",
+    },
+    {
+      base_url: "https://karnatakajanapadasevatrust.org",
+      host: "karnatakajanapadasevatrust.org",
+      base_path: "",
+      expected: "https://karnatakajanapadasevatrust.org/",
+    },
+    {
+      base_url: "https://raagu.github.io/karnatakajanapadasevatrust",
+      host: "raagu.github.io",
+      base_path: "/karnatakajanapadasevatrust",
+      expected: "https://raagu.github.io/karnatakajanapadasevatrust/",
+    },
+  ];
+  try {
+    for (const scenario of scenarios) {
+      const siteURL = template.replace(
+        /\$\{\{\s*steps\.pages\.outputs\.(\w+)\s*\}\}/g,
+        (_, key) => {
+          assert.ok(Object.hasOwn(scenario, key), `Unknown Pages output: ${key}`);
+          return scenario[key];
+        },
+      );
+      run(siteURL);
+      const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+      const schema = JSON.parse(html.match(/id="organization-schema">(.*?)<\/script>/s)[1]);
+      assert.equal(schema.url, scenario.expected);
+      assert.equal(schema.image, new URL("images/social-card.jpg", scenario.expected).href);
+      assert.ok(html.includes(`rel="canonical" href="${scenario.expected}"`));
+      assert.ok(html.includes(`property="og:url" content="${scenario.expected}"`));
+      const sitemap = await readFile(new URL("../dist/sitemap.xml", import.meta.url), "utf8");
+      assert.ok(sitemap.includes(`<loc>${scenario.expected}</loc>`));
+      const robots = await readFile(new URL("../dist/robots.txt", import.meta.url), "utf8");
+      assert.ok(robots.includes(`Sitemap: ${new URL("sitemap.xml", scenario.expected).href}`));
+    }
+  } finally {
+    run("");
+  }
+});
+
 test("the production build loads assets, fonts, dialogs and credits inside a Pages project directory", async () => {
   const prefix = "/karnatakajanapadasevatrust/";
   const dist = path.join(cwd, "dist");
