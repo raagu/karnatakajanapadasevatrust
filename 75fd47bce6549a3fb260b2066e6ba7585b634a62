@@ -1,0 +1,421 @@
+{
+  "version": 3,
+  "schemaVersion": 3,
+  "source": "mantis",
+  "sourceVersion": "1.0.17",
+  "generatedAt": "2026-11-10T13:16:38.717Z",
+  "files": [
+    {
+      "file": ".github/workflows/pages.yml",
+      "action": "edited",
+      "linesAffected": 2,
+      "linesAdded": 2,
+      "linesDeleted": 1,
+      "totalLines": 96,
+      "assistant": null,
+      "actors": {
+        "ai": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "manual": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "tool": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "unknown": {
+          "added": 2,
+          "deleted": 1,
+          "changed": 3,
+          "touched": 2
+        }
+      },
+      "linesTouched": 2
+    },
+    {
+      "file": "README.md",
+      "action": "edited",
+      "linesAffected": 2,
+      "linesAdded": 2,
+      "linesDeleted": 0,
+      "totalLines": 102,
+      "assistant": null,
+      "actors": {
+        "ai": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "manual": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "tool": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "unknown": {
+          "added": 2,
+          "deleted": 0,
+          "changed": 2,
+          "touched": 2
+        }
+      },
+      "linesTouched": 2
+    },
+    {
+      "file": "tests/build.test.mjs",
+      "action": "edited",
+      "linesAffected": 53,
+      "linesAdded": 53,
+      "linesDeleted": 0,
+      "totalLines": 263,
+      "assistant": null,
+      "actors": {
+        "ai": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "manual": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "tool": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "unknown": {
+          "added": 53,
+          "deleted": 0,
+          "changed": 53,
+          "touched": 53
+        }
+      },
+      "linesTouched": 53
+    }
+  ],
+  "hunks": [
+    {
+      "hunkId": "staged:1:.github/workflows/pages.yml",
+      "relativePath": ".github/workflows/pages.yml",
+      "oldStart": 74,
+      "oldLines": 1,
+      "newStart": 74,
+      "newLines": 2,
+      "linesAdded": 2,
+      "linesDeleted": 1,
+      "attribution": {
+        "bucket": "unknown",
+        "contributors": [
+          {
+            "actor": "unknown",
+            "tool": null,
+            "source": null,
+            "evidenceLevel": "unknown"
+          }
+        ],
+        "actors": [
+          "unknown"
+        ],
+        "aiInvolved": false,
+        "humanInvolved": false,
+        "toolInvolved": false,
+        "unknownInvolved": true
+      },
+      "evidence": {
+        "level": "unknown",
+        "kind": "unknown",
+        "source": "staged-diff",
+        "reason": null
+      },
+      "metadata": {
+        "strategy": "staged-diff-hunk-overlap-v1",
+        "stagedStatus": "M",
+        "oldPath": ".github/workflows/pages.yml",
+        "newPath": ".github/workflows/pages.yml",
+        "matchedOperationCount": 0,
+        "matchedHunkCount": 0,
+        "matchedInheritedHunkCount": 0,
+        "actorLineCounts": {
+          "ai": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "manual": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "tool": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "unknown": {
+            "added": 2,
+            "deleted": 1,
+            "changed": 3,
+            "touched": 2
+          }
+        },
+        "actorLineCountsSource": "working-tree-edited-file-actor-snapshot"
+      }
+    },
+    {
+      "hunkId": "staged:2:README.md",
+      "relativePath": "README.md",
+      "oldStart": 30,
+      "oldLines": 0,
+      "newStart": 31,
+      "newLines": 2,
+      "linesAdded": 2,
+      "linesDeleted": 0,
+      "attribution": {
+        "bucket": "unknown",
+        "contributors": [
+          {
+            "actor": "unknown",
+            "tool": null,
+            "source": null,
+            "evidenceLevel": "unknown"
+          }
+        ],
+        "actors": [
+          "unknown"
+        ],
+        "aiInvolved": false,
+        "humanInvolved": false,
+        "toolInvolved": false,
+        "unknownInvolved": true
+      },
+      "evidence": {
+        "level": "unknown",
+        "kind": "unknown",
+        "source": "staged-diff",
+        "reason": null
+      },
+      "metadata": {
+        "strategy": "staged-diff-hunk-overlap-v1",
+        "stagedStatus": "M",
+        "oldPath": "README.md",
+        "newPath": "README.md",
+        "matchedOperationCount": 0,
+        "matchedHunkCount": 0,
+        "matchedInheritedHunkCount": 0,
+        "actorLineCounts": {
+          "ai": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "manual": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "tool": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "unknown": {
+            "added": 2,
+            "deleted": 0,
+            "changed": 2,
+            "touched": 2
+          }
+        },
+        "actorLineCountsSource": "working-tree-edited-file-actor-snapshot"
+      }
+    },
+    {
+      "hunkId": "staged:3:tests/build.test.mjs",
+      "relativePath": "tests/build.test.mjs",
+      "oldStart": 103,
+      "oldLines": 0,
+      "newStart": 104,
+      "newLines": 53,
+      "linesAdded": 53,
+      "linesDeleted": 0,
+      "attribution": {
+        "bucket": "unknown",
+        "contributors": [
+          {
+            "actor": "unknown",
+            "tool": null,
+            "source": null,
+            "evidenceLevel": "unknown"
+          }
+        ],
+        "actors": [
+          "unknown"
+        ],
+        "aiInvolved": false,
+        "humanInvolved": false,
+        "toolInvolved": false,
+        "unknownInvolved": true
+      },
+      "evidence": {
+        "level": "unknown",
+        "kind": "unknown",
+        "source": "staged-diff",
+        "reason": null
+      },
+      "metadata": {
+        "strategy": "staged-diff-hunk-overlap-v1",
+        "stagedStatus": "M",
+        "oldPath": "tests/build.test.mjs",
+        "newPath": "tests/build.test.mjs",
+        "matchedOperationCount": 0,
+        "matchedHunkCount": 0,
+        "matchedInheritedHunkCount": 0,
+        "actorLineCounts": {
+          "ai": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "manual": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "tool": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "unknown": {
+            "added": 53,
+            "deleted": 0,
+            "changed": 53,
+            "touched": 53
+          }
+        },
+        "actorLineCountsSource": "working-tree-edited-file-actor-snapshot"
+      }
+    }
+  ],
+  "summary": {
+    "totalHunks": 3,
+    "buckets": {
+      "ai_only": 0,
+      "human_only": 0,
+      "tool_only": 0,
+      "mixed_ai_human": 0,
+      "mixed_ai_tool": 0,
+      "mixed_human_tool": 0,
+      "mixed_ai_human_tool": 0,
+      "unknown": 3
+    },
+    "aiInvolved": 0,
+    "humanInvolved": 0,
+    "toolInvolved": 0,
+    "unknownInvolved": 3,
+    "linesAdded": 57,
+    "linesDeleted": 1
+  },
+  "reconciliation": {
+    "schemaVersion": 3,
+    "strategy": "staged-diff-hunk-overlap-v1",
+    "stagedHunkCount": 3,
+    "matchedHunkCount": 0,
+    "unknownHunkCount": 3,
+    "files": [
+      ".github/workflows/pages.yml",
+      "README.md",
+      "tests/build.test.mjs"
+    ],
+    "lineSummaryByBucket": {
+      "ai_only": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "human_only": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "tool_only": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_ai_human": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_ai_tool": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_human_tool": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_ai_human_tool": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "unknown": {
+        "hunks": 3,
+        "linesAdded": 57,
+        "linesDeleted": 1
+      }
+    },
+    "hunkSummary": {
+      "totalHunks": 3,
+      "buckets": {
+        "ai_only": 0,
+        "human_only": 0,
+        "tool_only": 0,
+        "mixed_ai_human": 0,
+        "mixed_ai_tool": 0,
+        "mixed_human_tool": 0,
+        "mixed_ai_human_tool": 0,
+        "unknown": 3
+      },
+      "aiInvolved": 0,
+      "humanInvolved": 0,
+      "toolInvolved": 0,
+      "unknownInvolved": 3,
+      "linesAdded": 57,
+      "linesDeleted": 1
+    }
+  }
+}
