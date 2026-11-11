@@ -110,7 +110,7 @@ test("keyboard users can open, navigate and dismiss dialogs with focus restored"
     await expect(dialog).not.toBeVisible();
     await expect(trigger).toBeFocused();
 
-    const artTrigger = page.getByRole("button", {
+    const artTrigger = page.getByRole("link", {
       name: "Explore Dollu Kunitha",
       exact: true,
     });
@@ -498,7 +498,7 @@ test("a fresh visit renders the official Kannada name, page, labels and search m
       await expect(page.locator("html")).toHaveAttribute("lang", "kn");
       await expect(
         page.locator('[data-language="kn"]').first(),
-      ).toHaveAttribute("aria-pressed", "true");
+      ).toHaveAttribute("aria-current", "page");
       await expect(page.locator(".brand-kannada")).toHaveText(
         officialKannadaName,
       );
@@ -748,7 +748,7 @@ test("language switching works from the keyboard and preserves mobile dialog foc
       await expect(english).toBeFocused();
       const kannada = page.locator('[data-language="kn"]').first();
       await kannada.focus();
-      await page.keyboard.press("Space");
+      await page.keyboard.press("Enter");
       await expect(page.locator("html")).toHaveAttribute("lang", "kn");
       await expect(kannada).toBeFocused();
       const toggle = page.locator(".menu-toggle");
@@ -960,7 +960,7 @@ test("leadership shows one president card with a loaded portrait in both languag
         const card = leadership.locator(".leader-card");
         await expect(card).toHaveCount(1);
         await expect(card.getByRole("heading", { level: 3 })).toHaveText(
-          language === "kn" ? "ಟಿ.ಎ. ನಾರಾಯಣ ಗೌಡ" : "T.A. Narayana Gowda",
+          language === "kn" ? "ಟಿ.ಎ. ನಾರಾಯಣಗೌಡ್ರು" : "T.A. Narayana Gowda",
         );
         await expect(card.locator(".leader-role")).toHaveText(
           language === "kn" ? "ಅಧ್ಯಕ್ಷರು" : "PRESIDENT",
@@ -971,7 +971,7 @@ test("leadership shows one president card with a loaded portrait in both languag
         const image = leadership.locator("img");
         await expect(image).toHaveCount(1);
         await image.scrollIntoViewIfNeeded();
-        await expect(image).toHaveAttribute("src", "./images/president.jpg");
+        await expect(image).toHaveJSProperty("src", new URL("images/president.jpg", baseURL).href);
         await expect.poll(() => image.evaluate(
           (element) => element.complete && element.naturalWidth > 0,
         )).toBe(true);
@@ -1072,16 +1072,16 @@ test("every gallery and detail image is a photograph and Kinnal context is visib
     for (const language of ["en", "kn"]) {
       await page.locator(`[data-language="${language}"]`).first().click();
       await card.scrollIntoViewIfNeeded();
-      await expect(card.locator("img")).toHaveAttribute(
+      await expect(card.locator("img")).toHaveJSProperty(
         "src",
-        "./images/kinhal-authentic.jpg",
+        new URL("images/kinhal-authentic.jpg", baseURL).href,
       );
       await expect(card).toContainText(entry.photoCaption[language]);
       await card.locator('[data-art-open="kinhal"]').click();
       const dialog = page.locator("#site-dialog");
-      await expect(dialog.locator(".dialog-photo")).toHaveAttribute(
+      await expect(dialog.locator(".dialog-photo")).toHaveJSProperty(
         "src",
-        "./images/kinhal-authentic.jpg",
+        new URL("images/kinhal-authentic.jpg", baseURL).href,
       );
       await expect(dialog).toContainText(entry.photoCaption[language]);
       await dialog.locator("#art-credit").scrollIntoViewIfNeeded();
@@ -1131,7 +1131,7 @@ test("the dedicated instrument section is accessible in both languages on deskto
           const card = page.locator(`[data-instrument="${entry.id}"]`);
           await expect(card.locator("h3")).toHaveText(entry[language].name);
           await expect(card.locator(".instrument-summary")).toHaveText(entry[language].summary);
-          await card.locator("button").click();
+          await card.locator(".instrument-open").click();
           await expect(page.locator("#dialog-title")).toHaveText(entry[language].name);
           await expect.poll(() => page.locator(".dialog-photo").evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
           await page.keyboard.press("Escape");

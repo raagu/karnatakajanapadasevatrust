@@ -1,6 +1,9 @@
 import { cp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
-import { escapeHTML, renderHeritageHTML } from "../public/gallery.js";
+import { escapeHTML } from "../public/gallery.js";
+import { galleryEntries } from "../public/content.js";
+import { routeFor, languages } from "../public/routes.js";
+import { renderSeoPage } from "./seo-pages.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 let siteURL = process.env.SITE_URL;
@@ -34,45 +37,26 @@ await mkdir(path.join(root, "dist"), { recursive: true });
 await cp(path.join(root, "public"), path.join(root, "dist"), {
   recursive: true,
 });
-let html = await readFile(path.join(root, "dist/index.html"), "utf8");
-html = renderHeritageHTML(html);
-if (siteURL) {
-  const socialImageURL = new URL("images/social-card.jpg", siteURL).href;
-  html = html
-    .replace(
-      "</head>",
-      `  <link rel="canonical" href="${escapeHTML(siteURL)}">\n  <meta property="og:url" content="${escapeHTML(siteURL)}">\n</head>`,
-    )
-    .replaceAll(
-      'content="./images/social-card.jpg"',
-      `content="${escapeHTML(socialImageURL)}"`,
-    );
-  const schemaPattern =
-    /(<script type="application\/ld\+json" id="organization-schema">)(.*?)(<\/script>)/s;
-  if (!schemaPattern.test(html)) {
-    throw new Error("Organization schema is missing from the source page.");
+const template = await readFile(path.join(root, "public/index.html"), "utf8");
+const media = JSON.parse(await readFile(path.join(root, "public/media.json"), "utf8"));
+const pages = [];
+for (const language of languages) {
+  for (const id of [null, ...galleryEntries.map((entry) => entry.id)]) {
+    const route = routeFor(language, id);
+    const destination = path.join(root, "dist", route);
+    await mkdir(destination, { recursive: true });
+    await writeFile(path.join(destination, "index.html"), renderSeoPage(template, language, id, siteURL, media));
+    pages.push(route);
   }
-  html = html.replace(
-    schemaPattern,
-    (_, open, data, close) =>
-      open +
-      JSON.stringify({
-        ...JSON.parse(data),
-        url: siteURL,
-        image: socialImageURL,
-      }) +
-      close,
-  );
-  await writeFile(
-    path.join(root, "dist/sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${escapeHTML(siteURL)}</loc></url></urlset>\n`,
-  );
 }
-await writeFile(path.join(root, "dist/index.html"), html);
+if (siteURL) {
+  const urls = pages.map((route) => `<url><loc>${escapeHTML(new URL(route, siteURL).href)}</loc></url>`).join("");
+  await writeFile(path.join(root, "dist/sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>\n`);
+}
 await writeFile(
   path.join(root, "dist/robots.txt"),
   `User-agent: *\nAllow: /\n${siteURL ? `Sitemap: ${new URL("sitemap.xml", siteURL).href}\n` : ""}`,
 );
 console.log(
-  `Built static website in dist/${siteURL ? ` for ${siteURL}` : " (set SITE_URL for canonical URL and sitemap)"}.`,
+  `Built ${pages.length} static pages in dist/${siteURL ? ` for ${siteURL}` : " (set SITE_URL for canonical URL and sitemap)"}.`,
 );

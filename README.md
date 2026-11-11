@@ -2,17 +2,18 @@
 
 A responsive website with a modern photographic layout, 38 researched tradition and instrument entries, bilingual search, category shortcuts, combined filters, accessible dialogs, leadership cards, direct calling and WhatsApp enquiries. There is no production JavaScript framework, database, payment processor or stored enquiry details.
 
-The default language is Kannada, using the official name **ಕರ್ನಾಟಕ ಜನಪದ ಸೇವಾ ಟ್ರಸ್ಟ್**. A persistent Kannada/English switch translates the page, art details, dialogs, form labels, validation, WhatsApp message boilerplate, accessible labels and search metadata. The choice is saved on the visitor's device in `localStorage`; enquiry details are not stored. Dialog language controls preserve entered values and selected interests. The default HTML contains Kannada before JavaScript runs.
+The default language is Kannada, using the official name **ಕರ್ನಾಟಕ ಜನಪದ ಸೇವಾ ಟ್ರಸ್ಟ್**. A persistent Kannada/English switch translates the page, art details, dialogs, form labels, validation, WhatsApp message boilerplate, accessible labels and search metadata. Each language has a permanent address: Kannada at `/` and English at `/en/`. The URL determines the rendered language, so a saved preference never silently replaces a crawlable page with another language. The choice is also saved on the visitor's device in `localStorage`; enquiry details are not stored. Dialog language controls preserve entered values and selected interests. Both languages are rendered into HTML before JavaScript runs.
 
 ## Look Preview
 
 Requirements: Node.js 22 or newer and Python 3.
 
 ```sh
+npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:4173. The `public/` directory is the complete website. Serve it through HTTP rather than opening the HTML as a file.
+Open http://127.0.0.1:4173. `npm run dev` builds the source in `public/` and serves the generated `dist/` directory, including the nested language and tradition pages. Serve it through HTTP rather than opening the HTML as a file.
 
 ## Build and hosting
 
@@ -20,9 +21,9 @@ Open http://127.0.0.1:4173. The `public/` directory is the complete website. Ser
 SITE_URL=https://your-confirmed-domain.example npm run build
 ```
 
-Replace the example with the actual HTTPS website URL, including its directory when hosted as a GitHub Pages project. A trailing slash is normalized automatically. This adds the canonical URL, absolute social image URLs, organization URL and sitemap. Credentials, query strings and fragments are rejected. Without `SITE_URL`, the build deliberately omits canonical and sitemap URLs rather than inventing a domain.
+Replace the example with the actual HTTPS website URL, including its directory when hosted as a GitHub Pages project. A trailing slash is normalized automatically. This generates 78 static HTML pages with canonical URLs, reciprocal language alternatives, absolute social images, structured data and a complete sitemap. Credentials, query strings and fragments are rejected. Without `SITE_URL`, the build deliberately omits canonical and sitemap URLs rather than inventing a domain.
 
-Upload the contents of `dist/` to a static web host, or import the repository into Netlify or Vercel using the included configuration. Set `SITE_URL` in that host's build environment. The build has no production package dependencies. Assets use relative paths so the website works both at a domain root and inside a project directory.
+Upload the contents of `dist/` to a static web host, or import the repository into Netlify or Vercel using the included configuration. Set `SITE_URL` in that host's build environment. The build uses `parse5` as a development dependency to render valid, localized HTML. The published website has no runtime package dependencies. Assets use relative paths so the website works both at a domain root and inside a project directory.
 
 ### GitHub Pages
 
@@ -64,17 +65,22 @@ To roll back, revert the source commit on `main`; the workflow will test and red
 - `public/photo-assets.js`: reviewed replacement photographs, accurate bilingual captions and documentary/representative context.
 - `public/gallery.js`: shared static gallery and filter rendering. The collection has 4 literature, 4 music, 11 dance/theatre, 3 ritual, 3 puppetry, 5 craft and 8 instrument entries. A dedicated instruments section uses the same records and dialogs. Togalu Gombeyata remains a single entry in the puppetry group.
 - `public/translations.js`: English/Kannada page dictionaries, Kannada art descriptions and dialog translations.
-- `public/locale.js`: language switching, device preference, metadata and in-place dialog translation.
+- `public/locale.js`: URL-based language switching and in-place dialog translation.
+- `public/routes.js`: shared language/detail routes, native language links and safe in-place navigation.
+- `public/seo.js`: shared localized page metadata and structured data.
+- `public/tradition.js`: full detail pages generated from existing tradition records.
+- `public/page-messages.js` and `public/ui-messages.js`: shared build/browser translations.
+- `scripts/seo-pages.mjs`: HTML localization and static page generation during the build.
 - `public/styles.css`: responsive design and reduced-motion support.
 - `public/app.js`: gallery filters, dialogs, image fallbacks and WhatsApp draft flow.
 - `public/media.json`: image provenance, creator and license register. Visible image credits are generated from this file.
-- `public/fonts/`: self-hosted Inter and Noto Sans Kannada fonts with their open font licenses.
+- `public/fonts/`: self-hosted Inter and Noto Sans Kannada fonts with their open font licenses. WOFF2 versions preserve the original glyphs and metrics and reduce font bytes by about 67%; the original TTF files remain as fallbacks. To regenerate them after a font update, install `fonttools[woff]` in an isolated Python environment and run `python scripts/compress-fonts.py`. This optional maintenance tool is not part of the deployment build.
 
 Every entry uses a local JPEG photograph or documentary video still with reviewed provenance. Archival stills are identified as such; lower-resolution sources retain their native size. The gallery renderer rejects illustration assets. Some oral-literature entries use explicitly captioned photographs of oral-heritage field documentation, rather than claiming an exact photographed proverb or riddle exchange. The Kinnal image depicts a painted wooden goddess from the documented Sawantwadi–Kinnal Woodcraft Revival Project; that joint-project context is visible in both its card and dialog. Source, creator, license and resizing details are recorded in `public/media.json`.
 
 The Krishna Parijatha and Sannata/Bayalata theatre thumbnails are the exact images selected by the user; their records make no Creative Commons or public-domain claim. The Krishna-themed stage image is representative: its regional production style has not been independently verified. The Bayalata image is not asserted to depict a Sannata production. Media is stored locally; the browser never searches third-party image services. If a photograph fails, the browser retries another size of the same photograph, then displays a localized unavailable message. It never substitutes a drawing or an unrelated photograph. `scripts/refresh-media.py` can refresh reviewed source images in `media.json`; it never selects random search results or refreshes user-supplied images. The optional maintenance command requires Pillow, stages a complete batch, and retains cached images when a download cannot complete.
 
-`npm run dev` regenerates the default Kannada gallery and category shortcuts before starting. After editing the collection while the server is already running, use `npm run refresh-content` and reload the page. Production builds render the same registry without JavaScript. Search matches Kannada and English names, aliases, summaries and regional associations; query, theme and region selections combine. Changing language preserves the search and filter state. Photo dialogs keep their language and close controls visible while scrolling.
+`npm run dev` regenerates the default Kannada gallery and category shortcuts, then builds all pages before starting. After editing source while the server is running, use `npm run refresh-content` and `npm run build`, then reload the page. Production builds render the same registry without JavaScript. Search matches Kannada and English names, aliases, summaries and regional associations; query, theme and region selections combine. Changing language preserves the search and filter state. Photo dialogs keep their language and close controls visible while scrolling.
 
 ## Evidence and pending material
 
@@ -99,4 +105,27 @@ Browser tests use installed Google Chrome on macOS and Playwright's Chromium on 
 
 Locale checks cover the Kannada default, exact Trust spelling, fully translated visible copy and accessible labels, English preference persistence, live form switching, Kannada message drafts, metadata and responsive layouts. Gallery checks cover real JPEG file signatures, photo provenance, exact card/dialog assets, Kinnal context captions, bilingual search, combined filters, shortcuts, empty states, image recovery, the complete leadership card and static build controls. Optional media-maintenance tests can be run with `python -m unittest discover -s tests -p 'test_refresh_media.py'` in an environment containing Pillow.
 
-The server supports a single page with anchor navigation. No SPA fallback or backend is required. To roll back a deployment, restore a previously tested static build through the hosting provider.
+The homepages retain anchor navigation and the existing detail popups. Permanent detail pages use ordinary directories containing `index.html`; no SPA fallback or backend is required. To roll back a deployment, restore a previously tested static build through the hosting provider.
+
+## Technical SEO
+
+The build publishes the existing content at these stable routes:
+
+| Page | Kannada | English |
+| --- | --- | --- |
+| Homepage | `/` | `/en/` |
+| Each of the 38 traditions/instruments | `/traditions/<entry-id>/` | `/en/traditions/<entry-id>/` |
+
+All 78 pages contain their complete localized copy without executing JavaScript. Each has one main heading, a unique title and description, a self-referencing canonical URL, and reciprocal `kn`, `en` and `x-default` language links when `SITE_URL` is configured. The Kannada page is the default language alternative. Existing homepage cards and language controls have real `href` links; JavaScript preserves the current popup and in-place language-switching experience. Modified clicks and JavaScript-disabled browsers use the permanent pages. Keep published entry IDs stable to avoid breaking indexed addresses.
+
+Organization, website, page, article and breadcrumb structured data describe the existing visible facts. No author, founder, event date, review or publication date is invented. The sitemap lists the 78 canonical addresses; it does not manufacture update dates. `robots.txt` allows the pages and their rendering resources. It is a crawler instruction file, not attack protection.
+
+After the owner pushes these changes and the Pages workflow succeeds:
+
+1. Verify `karnatakajanapadasevatrust.org` in [Google Search Console](https://search.google.com/search-console). If already verified, select that property.
+2. In **Sitemaps**, submit `https://karnatakajanapadasevatrust.org/sitemap.xml`.
+3. Use **URL inspection** to check the Kannada homepage, `/en/` and a tradition page in each language. Confirm the live page is accessible and request indexing for those examples. Monitor **Page indexing** and **Performance** for actual coverage, search impressions and clicks.
+
+The code makes the pages technically discoverable and eligible for indexing. Google decides whether and when to index them and where to rank them; source changes and automated SEO scores cannot guarantee top rankings. See Google's [localized-page guidance](https://developers.google.com/search/docs/specialty/international/localized-versions), [crawlable-link guidance](https://developers.google.com/search/docs/crawling-indexing/links-crawlable) and [SEO starter guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide).
+
+`tests/seo.test.mjs` validates every generated page's localized content, canonical and reciprocal language links, unique metadata, truthful structured data and sitemap membership. Browser checks include JavaScript-disabled navigation, both hosting path formats, images, keyboard/language switching, forms and history navigation. Build tests use disposable copies so they cannot overwrite the running preview.

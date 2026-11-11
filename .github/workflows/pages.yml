@@ -55,9 +55,12 @@ jobs:
       - name: Refresh the static collection
         run: npm run refresh-content
 
+      - name: Build the local test preview
+        run: npm run build
+
       - name: Test the website and project-path build
         run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 --directory public > "$RUNNER_TEMP/kjst-preview.log" 2>&1 &
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory dist > "$RUNNER_TEMP/kjst-preview.log" 2>&1 &
           preview_pid=$!
           trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
           curl --fail --silent --retry 10 --retry-connrefused --retry-delay 1 http://127.0.0.1:4173/ > /dev/null
@@ -67,7 +70,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
-      # Tests also build dist/, so the production build must run after them.
+      # Create the deployment artifact only after validation succeeds.
       - name: Build for the actual Pages address
         run: npm run build
         env:

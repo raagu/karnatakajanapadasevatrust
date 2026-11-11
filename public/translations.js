@@ -597,7 +597,7 @@ export const messages = {
   },
   "leader.president.name": {
     en: "T.A. Narayana Gowda",
-    kn: "ಟಿ.ಎ. ನಾರಾಯಣ ಗೌಡ",
+    kn: "ಟಿ.ಎ. ನಾರಾಯಣಗೌಡ್ರು",
     html: false,
   },
   "leader.president.role": {
@@ -617,7 +617,7 @@ export const messages = {
   },
   "leader.president.alt": {
     en: "T.A. Narayana Gowda - President",
-    kn: "ಟಿ.ಎ. ನಾರಾಯಣ ಗೌಡ — ಅಧ್ಯಕ್ಷರು",
+    kn: "ಟಿ.ಎ. ನಾರಾಯಣಗೌಡ್ರು — ಅಧ್ಯಕ್ಷರು",
     html: false,
   },
   "join.eyebrow": {
@@ -779,7 +779,7 @@ export const knArts = {
 };
 export const uiKannada = {
   trustName: "ಕರ್ನಾಟಕ ಜನಪದ ಸೇವಾ ಟ್ರಸ್ಟ್",
-  presidentName: "ಟಿ.ಎ. ನಾರಾಯಣ ಗೌಡ",
+  presidentName: "ಟಿ.ಎ. ನಾರಾಯಣಗೌಡ್ರು",
   presidentRole: "ಅಧ್ಯಕ್ಷರು",
   closeDialog: "ಮುಚ್ಚಿ",
   rootsHeading: "ನೆಲೆ ಮತ್ತು ಪ್ರದೇಶ",

@@ -1,7 +1,11 @@
+import { routeFor } from "./routes.js";
 import { galleryEntries, categories } from "./content.js";
 
 // Keep local assets inside the site's directory, including on project Pages URLs.
-export const assetPath = (value) => value.replace(/^\/(?!\/)/, "./");
+export const assetPath = (value) => {
+  const relative = value.replace(/^\/(?!\/)/, "./");
+  return typeof document === "undefined" ? relative : new URL(relative, import.meta.url).href;
+};
 
 export const galleryLabels = {
   en: {
@@ -85,7 +89,7 @@ export function renderGallery(language = "kn") {
         ? `srcset="${escapeHTML(assetPath(entry.smallImageSrc))} ${entry.smallImageWidth}w, ${escapeHTML(assetPath(entry.imageSrc))} ${entry.imageWidth}w" sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"`
         : "";
       const photoClass = ` class="art-photo photo-${entry.id}${entry.photoFit === "contain" ? " photo-contain" : ""}"`;
-      return `<article class="art-card" data-regions="${entry.regions.join(" ")}" data-category-card="${entry.category}" data-art="${entry.id}"><button type="button" class="art-open" data-art-open="${entry.id}" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="art-image"><img${photoClass} src="${escapeHTML(assetPath(entry.imageSrc))}" ${responsive} width="1200" height="800" alt="${escapeHTML(copy.alt)}" loading="lazy"><span class="art-category-badge">${escapeHTML(categoryShort[entry.category][language])}</span><span class="art-arrow" aria-hidden="true">↗</span></div><div class="art-body"><p class="art-region">${escapeHTML(copy.region)}</p><h3>${escapeHTML(copy.name)}</h3><p class="art-summary">${escapeHTML(copy.summary)}</p><span class="art-cta">${labels.explore}<span aria-hidden="true">→</span></span></div></button>${entry.photoCaption[language] ? `<p class="art-photo-caption"><span data-i18n="gallery.contextPhoto">${labels.contextPhoto}</span>: <span class="photo-caption-copy">${escapeHTML(entry.photoCaption[language])}</span></p>` : ""}</article>`;
+      return `<article class="art-card" data-regions="${entry.regions.join(" ")}" data-category-card="${entry.category}" data-art="${entry.id}"><a class="art-open" href="./${routeFor(language, entry.id)}" data-art-open="${entry.id}" aria-haspopup="dialog" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="art-image"><img${photoClass} src="${escapeHTML(assetPath(entry.imageSrc))}" ${responsive} width="1200" height="800" alt="${escapeHTML(copy.alt)}" loading="lazy"><span class="art-category-badge">${escapeHTML(categoryShort[entry.category][language])}</span><span class="art-arrow" aria-hidden="true">↗</span></div><div class="art-body"><p class="art-region">${escapeHTML(copy.region)}</p><h3>${escapeHTML(copy.name)}</h3><p class="art-summary">${escapeHTML(copy.summary)}</p><span class="art-cta">${labels.explore}<span aria-hidden="true">→</span></span></div></a>${entry.photoCaption[language] ? `<p class="art-photo-caption"><span data-i18n="gallery.contextPhoto">${labels.contextPhoto}</span>: <span class="photo-caption-copy">${escapeHTML(entry.photoCaption[language])}</span></p>` : ""}</article>`;
     })
     .join(
       "",
@@ -148,7 +152,7 @@ export function renderInstrumentSection(language = "kn") {
   const labels = instrumentLabels[language];
   const cards = galleryEntries.filter((entry) => entry.category === "instruments").map((entry) => {
     const copy = entry[language];
-    return `<article class="instrument-card" data-instrument="${entry.id}"><button type="button" class="instrument-open" data-art-open="${entry.id}" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="instrument-photo"><img class="${entry.photoFit === "contain" ? "photo-contain" : ""}" src="${escapeHTML(assetPath(entry.smallImageSrc || entry.imageSrc))}" width="640" height="420" loading="lazy" alt="${escapeHTML(copy.alt)}"></div><div class="instrument-body"><p class="instrument-family">${escapeHTML(copy.tag)}</p><h3>${escapeHTML(copy.name)}</h3><p class="instrument-summary">${escapeHTML(copy.summary)}</p><span class="instrument-cta">${labels.explore}<span aria-hidden="true">↗</span></span></div></button></article>`;
+    return `<article class="instrument-card" data-instrument="${entry.id}"><a class="instrument-open" href="./${routeFor(language, entry.id)}" data-art-open="${entry.id}" aria-haspopup="dialog" aria-label="${escapeHTML(language === "kn" ? copy.name + " ಪರಿಚಯ" : "Explore " + copy.name)}"><div class="instrument-photo"><img class="${entry.photoFit === "contain" ? "photo-contain" : ""}" src="${escapeHTML(assetPath(entry.smallImageSrc || entry.imageSrc))}" width="640" height="420" loading="lazy" alt="${escapeHTML(copy.alt)}"></div><div class="instrument-body"><p class="instrument-family">${escapeHTML(copy.tag)}</p><h3>${escapeHTML(copy.name)}</h3><p class="instrument-summary">${escapeHTML(copy.summary)}</p><span class="instrument-cta">${labels.explore}<span aria-hidden="true">↗</span></span></div></a></article>`;
   }).join("");
   return `<section id="instruments" class="section instruments-section" aria-labelledby="instruments-heading"><div class="section-heading-row"><div><p class="eyebrow" data-i18n="instruments.eyebrow">${labels.eyebrow}</p><h2 id="instruments-heading" data-i18n="instruments.heading">${labels.heading}</h2></div><p data-i18n="instruments.intro">${labels.intro}</p></div><div class="instrument-grid">${cards}</div><a class="button button-outline" href="#heritage" data-browse-category="instruments" data-i18n="instruments.browse">${labels.browse}</a></section>`;
 }
@@ -159,25 +163,25 @@ function replaceBlock(html, start, end, content) {
     throw new Error(`Missing gallery template marker ${start}`);
   return html.slice(0, a) + start + content + end + html.slice(b + end.length);
 }
-export function renderHeritageHTML(html) {
+export function renderHeritageHTML(html, language = "kn") {
   html = replaceBlock(
     html,
     "<!-- folk-instruments:start -->",
     "<!-- folk-instruments:end -->",
-    renderInstrumentSection("kn"),
+    renderInstrumentSection(language),
   );
   html = replaceBlock(
     html,
     "<!-- heritage-gallery:start -->",
     "<!-- heritage-gallery:end -->",
-    renderGallery("kn"),
+    renderGallery(language),
   );
   if (html.includes("<!-- heritage-controls:start -->"))
     html = replaceBlock(
       html,
       "<!-- heritage-controls:start -->",
       "<!-- heritage-controls:end -->",
-      renderExplorerControls("kn"),
+      renderExplorerControls(language),
     );
   else {
     const a = html.indexOf("<!-- heritage-categories:start -->");
@@ -186,7 +190,7 @@ export function renderHeritageHTML(html) {
     html =
       html.slice(0, a) +
       "<!-- heritage-controls:start -->" +
-      renderExplorerControls("kn") +
+      renderExplorerControls(language) +
       "<!-- heritage-controls:end -->" +
       html.slice(b);
   }
@@ -195,13 +199,13 @@ export function renderHeritageHTML(html) {
       html,
       "<!-- heritage-shortcuts:start -->",
       "<!-- heritage-shortcuts:end -->",
-      renderShortcuts("kn"),
+      renderShortcuts(language),
     );
   else
     html = html.replace(
       '<section id="about"',
       "<!-- heritage-shortcuts:start -->" +
-        renderShortcuts("kn") +
+        renderShortcuts(language) +
         '<!-- heritage-shortcuts:end --><section id="about"',
     );
   // The source may have a formatted multi-line opening section tag.
@@ -209,12 +213,12 @@ export function renderHeritageHTML(html) {
     html = html.replace(
       /<section\s+id="about"/,
       "<!-- heritage-shortcuts:start -->" +
-        renderShortcuts("kn") +
+        renderShortcuts(language) +
         '<!-- heritage-shortcuts:end --><section id="about"',
     );
   html = html.replace(
     /<noscript\b[^>]*>[\s\S]*?<\/noscript\s*>/,
-    `<noscript><p>${galleryEntries.length} ಕಲಾಪರಂಪರೆಗಳನ್ನೂ ಇಲ್ಲಿ ಕಾಣಬಹುದು. ಹುಡುಕಾಟ, ವಿಷಯ ಮತ್ತು ಪ್ರದೇಶದ ಆಯ್ಕೆಗಳಿಗೆ ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್ ಸಕ್ರಿಯಗೊಳಿಸಿ. ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗೆ <a href="tel:+919902122029">99021 22029</a> ಸಂಖ್ಯೆಗೆ ಕರೆಮಾಡಿ.</p></noscript>`,
+    `<noscript><p>${language === "kn" ? `${galleryEntries.length} ಕಲಾಪರಂಪರೆಗಳನ್ನೂ ಇಲ್ಲಿ ಕಾಣಬಹುದು. ಹುಡುಕಾಟ, ವಿಷಯ ಮತ್ತು ಪ್ರದೇಶದ ಆಯ್ಕೆಗಳಿಗೆ ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್ ಸಕ್ರಿಯಗೊಳಿಸಿ. ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗೆ <a href="tel:+919902122029">99021 22029</a> ಸಂಖ್ಯೆಗೆ ಕರೆಮಾಡಿ.` : `All ${galleryEntries.length} traditions are available here. Enable JavaScript to use search, theme and region filters. For more information, call <a href="tel:+919902122029">99021 22029</a>.`}</p></noscript>`,
   );
   return html;
 }

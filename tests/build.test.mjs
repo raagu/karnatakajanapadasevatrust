@@ -1,22 +1,21 @@
-import test from "node:test";
+import test, { after } from "node:test";
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
 import { readFile, access } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 import { createServer } from "node:http";
 import { once } from "node:events";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { chromium, expect } from "@playwright/test";
 import { browserOptions } from "./browser-options.mjs";
 import { galleryEntries } from "../public/content.js";
+import { createBuildFixture } from "./site-fixture.mjs";
 
-const cwd = fileURLToPath(new URL("../", import.meta.url));
-const run = (siteURL) =>
-  execFileSync(process.execPath, ["scripts/build.mjs"], {
-    cwd,
-    env: { ...process.env, SITE_URL: siteURL },
-    stdio: "pipe",
-  });
+// Build checks use a disposable checkout so they cannot replace the running preview.
+const fixture = await createBuildFixture();
+const cwd = fixture.root;
+const fixtureTestURL = pathToFileURL(path.join(cwd, "tests/build.test.mjs"));
+const run = (siteURL) => fixture.build(siteURL);
+after(() => fixture.cleanup());
 
 test("configured and unconfigured builds produce truthful search metadata", async () => {
   try {
@@ -29,7 +28,7 @@ test("configured and unconfigured builds produce truthful search metadata", asyn
       run(input);
       const siteURL = input.replace(/\/$/, "") + "/";
       const escapedURL = siteURL.replaceAll("&", "&amp;");
-      const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+      const html = await readFile(new URL("../dist/index.html", fixtureTestURL), "utf8");
       const schema = JSON.parse(html.match(/id="organization-schema">(.*?)<\/script>/s)[1]);
       const imageURL = new URL("images/social-card.jpg", siteURL).href;
       assert.equal(schema.url, siteURL);
@@ -38,11 +37,11 @@ test("configured and unconfigured builds produce truthful search metadata", asyn
       assert.ok(html.includes(`property="og:url" content="${escapedURL}"`));
       assert.ok(html.includes(`property="og:image" content="${imageURL.replaceAll("&", "&amp;")}"`));
       assert.ok(html.includes(`name="twitter:image" content="${imageURL.replaceAll("&", "&amp;")}"`));
-      const sitemap = await readFile(new URL("../dist/sitemap.xml", import.meta.url), "utf8");
+      const sitemap = await readFile(new URL("../dist/sitemap.xml", fixtureTestURL), "utf8");
       assert.ok(sitemap.includes(`<loc>${escapedURL}</loc>`));
-      const robots = await readFile(new URL("../dist/robots.txt", import.meta.url), "utf8");
+      const robots = await readFile(new URL("../dist/robots.txt", fixtureTestURL), "utf8");
       assert.ok(robots.includes(`Sitemap: ${new URL("sitemap.xml", siteURL).href}`));
-      await access(new URL("../dist/.nojekyll", import.meta.url));
+      await access(new URL("../dist/.nojekyll", fixtureTestURL));
     }
     for (const invalid of [
       "http://example.test",
@@ -54,14 +53,14 @@ test("configured and unconfigured builds produce truthful search metadata", asyn
     run("");
   }
   const html = await readFile(
-    new URL("../dist/index.html", import.meta.url),
+    new URL("../dist/index.html", fixtureTestURL),
     "utf8",
   );
   assert.doesNotMatch(html, /rel="canonical"/);
   assert.doesNotMatch(html, /example\.test/);
-  await assert.rejects(access(new URL("../dist/sitemap.xml", import.meta.url)));
+  await assert.rejects(access(new URL("../dist/sitemap.xml", fixtureTestURL)));
   for (const filename of ["../public/index.html", "../dist/index.html"]) {
-    const page = await readFile(new URL(filename, import.meta.url), "utf8");
+    const page = await readFile(new URL(filename, fixtureTestURL), "utf8");
     const regions = [
       ...page.matchAll(/<button\b[^>]*\bdata-filter="([^"]+)"[^>]*>/g),
     ]
@@ -103,7 +102,7 @@ test("configured and unconfigured builds produce truthful search metadata", asyn
 
 test("Pages workflow builds HTTPS metadata when Pages reports HTTP", async () => {
   const workflow = await readFile(
-    new URL("../.github/workflows/pages.yml", import.meta.url),
+    new URL("../.github/workflows/pages.yml", fixtureTestURL),
     "utf8",
   );
   const template = workflow.match(/^\s+SITE_URL:\s*(.+)$/m)?.[1];
@@ -138,15 +137,15 @@ test("Pages workflow builds HTTPS metadata when Pages reports HTTP", async () =>
         },
       );
       run(siteURL);
-      const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+      const html = await readFile(new URL("../dist/index.html", fixtureTestURL), "utf8");
       const schema = JSON.parse(html.match(/id="organization-schema">(.*?)<\/script>/s)[1]);
       assert.equal(schema.url, scenario.expected);
       assert.equal(schema.image, new URL("images/social-card.jpg", scenario.expected).href);
       assert.ok(html.includes(`rel="canonical" href="${scenario.expected}"`));
       assert.ok(html.includes(`property="og:url" content="${scenario.expected}"`));
-      const sitemap = await readFile(new URL("../dist/sitemap.xml", import.meta.url), "utf8");
+      const sitemap = await readFile(new URL("../dist/sitemap.xml", fixtureTestURL), "utf8");
       assert.ok(sitemap.includes(`<loc>${scenario.expected}</loc>`));
-      const robots = await readFile(new URL("../dist/robots.txt", import.meta.url), "utf8");
+      const robots = await readFile(new URL("../dist/robots.txt", fixtureTestURL), "utf8");
       assert.ok(robots.includes(`Sitemap: ${new URL("sitemap.xml", scenario.expected).href}`));
     }
   } finally {
@@ -165,6 +164,7 @@ test("the production build loads assets, fonts, dialogs and credits inside a Pag
     ".jpg": "image/jpeg",
     ".svg": "image/svg+xml",
     ".ttf": "font/ttf",
+    ".woff2": "font/woff2",
   };
   // Deliberately do not serve assets at the host root: a stray /images/ URL must fail.
   const server = createServer(async (request, response) => {

@@ -47,7 +47,7 @@ function creditLine(item) {
 
 async function getCredits() {
   if (credits) return credits;
-  const response = await fetch("./media.json");
+  const response = await fetch(new URL("./media.json", import.meta.url));
   if (!response.ok) throw new Error("Image credits could not be loaded.");
   credits = await response.json();
   return credits;
@@ -58,7 +58,7 @@ function showArt(id, trigger) {
   if (!art) return;
   const entry = galleryEntries.find((item) => item.id === id);
   showDialog(
-    `<figure class="dialog-media"><img class="dialog-photo photo-${id}${entry.photoFit === "contain" ? " photo-contain" : ""}" src="${text(assetPath(entry.imageSrc))}" width="1200" height="800" alt="${text(entry.en.alt)}">${entry.photoCaption.en ? `<figcaption class="dialog-photo-caption"><strong>Photo context</strong>: <span class="dialog-photo-caption-copy">${text(entry.photoCaption.en)}</span></figcaption>` : ""}</figure><div class="dialog-inner"><div class="dialog-category">${text(categories.find((category) => category.id === entry.category).en)}</div><p class="eyebrow">${text(art.region)}</p><h2 id="dialog-title">${text(art.name)}</h2><h3>Roots & region</h3><p>${text(art.origin)}</p><h3>Why it matters</h3><p>${text(art.importance)}</p><p class="source-note">Learn more: <a href="${art.source}" target="_blank" rel="noopener noreferrer">${art.sourceName} ↗</a></p><p class="source-note" id="art-credit">${art.illustrated ? "Original illustration created for this website." : 'Photo attribution: <a href="./media.json" target="_blank" rel="noopener noreferrer">view the image credit register</a>.'}</p></div>`,
+    `<figure class="dialog-media"><img class="dialog-photo photo-${id}${entry.photoFit === "contain" ? " photo-contain" : ""}" src="${text(assetPath(entry.imageSrc))}" width="1200" height="800" alt="${text(entry.en.alt)}">${entry.photoCaption.en ? `<figcaption class="dialog-photo-caption"><strong>Photo context</strong>: <span class="dialog-photo-caption-copy">${text(entry.photoCaption.en)}</span></figcaption>` : ""}</figure><div class="dialog-inner"><div class="dialog-category">${text(categories.find((category) => category.id === entry.category).en)}</div><p class="eyebrow">${text(art.region)}</p><h2 id="dialog-title">${text(art.name)}</h2><h3>Roots & region</h3><p>${text(art.origin)}</p><h3>Why it matters</h3><p>${text(art.importance)}</p><p class="source-note">Learn more: <a href="${art.source}" target="_blank" rel="noopener noreferrer">${art.sourceName} ↗</a></p><p class="source-note" id="art-credit">${art.illustrated ? "Original illustration created for this website." : 'Photo attribution: <a href="${text(new URL("./media.json", import.meta.url).href)}" target="_blank" rel="noopener noreferrer">view the image credit register</a>.'}</p></div>`,
     trigger,
   );
   dialog.dataset.artId = id;
@@ -128,7 +128,7 @@ async function showCredits(trigger) {
     const status = dialog.querySelector("#credits-status");
     if (status)
       status.innerHTML =
-        'Image credits could not be loaded. <a href="./media.json" target="_blank" rel="noopener noreferrer">Open the credit register</a> or try again.';
+        `Image credits could not be loaded. <a href="${text(new URL("./media.json", import.meta.url).href)}" target="_blank" rel="noopener noreferrer">Open the credit register</a> or try again.`;
     localizeDynamic(dialogContent);
   }
 }
@@ -142,7 +142,11 @@ function showPrivacy(trigger) {
 
 document.addEventListener("click", (event) => {
   const artButton = event.target.closest("[data-art-open]");
-  if (artButton) return showArt(artButton.dataset.artOpen, artButton);
+  if (artButton) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    return showArt(artButton.dataset.artOpen, artButton);
+  }
   const trigger = event.target.closest("[data-open]");
   if (!trigger) return;
   const handlers = {
@@ -181,7 +185,9 @@ dialog.addEventListener("close", () => {
 function updateGalleryCount(
   count = document.querySelectorAll(".art-card:not([hidden])").length,
 ) {
-  document.querySelector("#gallery-count").textContent = t(
+  const counter = document.querySelector("#gallery-count");
+  if (!counter) return;
+  counter.textContent = t(
     count === 1 ? "galleryCountOne" : "galleryCount",
   ).replace("{count}", count);
 }
@@ -196,6 +202,7 @@ updateGalleryCount();
 const selectedFilters = { region: "all", category: "all", query: "" };
 const searchInput = document.querySelector("#heritage-search");
 function applyGalleryFilters() {
+  if (!searchInput) return;
   let count = 0;
   for (const entry of galleryEntries) {
     const visible = matchesTradition(entry, selectedFilters);
@@ -232,6 +239,7 @@ document.querySelectorAll("[data-filter],[data-category]").forEach((button) => {
 function renderFilterChips() {
   const language = getLanguage(),
     list = document.querySelector(".active-filter-list");
+  if (!list) return;
   list.replaceChildren();
   const labels = {
     category: categories.find((item) => item.id === selectedFilters.category)?.[
@@ -260,11 +268,11 @@ function renderFilterChips() {
   }
   list.hidden = !list.childElementCount;
 }
-searchInput.addEventListener("input", () => {
+searchInput?.addEventListener("input", () => {
   selectedFilters.query = searchInput.value;
   applyGalleryFilters();
 });
-document.querySelector("[data-clear-search]").addEventListener("click", () => {
+document.querySelector("[data-clear-search]")?.addEventListener("click", () => {
   searchInput.value = "";
   selectedFilters.query = "";
   applyGalleryFilters();
@@ -272,7 +280,7 @@ document.querySelector("[data-clear-search]").addEventListener("click", () => {
 });
 document
   .querySelector(".active-filter-list")
-  .addEventListener("click", (event) => {
+  ?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-remove-filter]");
     if (!button) return;
     const key = button.dataset.removeFilter;
@@ -296,7 +304,7 @@ document.querySelectorAll("[data-browse-category]").forEach((link) =>
     applyGalleryFilters();
   }),
 );
-document.querySelector("[data-reset-gallery]").addEventListener("click", () => {
+document.querySelector("[data-reset-gallery]")?.addEventListener("click", () => {
   selectedFilters.category = selectedFilters.region = "all";
   selectedFilters.query = "";
   searchInput.value = "";
@@ -339,6 +347,7 @@ function recoverPhoto(img) {
     img.closest(".art-card")?.dataset.art ||
     img.closest(".instrument-card")?.dataset.instrument ||
     img.dataset.shortcutPhoto ||
+    img.dataset.traditionPhoto ||
     (img.classList.contains("dialog-photo") ? dialog.dataset.artId : null);
   const entry = galleryEntries.find((item) => item.id === id);
   const failed = img.currentSrc || img.src;
@@ -398,7 +407,8 @@ if ("IntersectionObserver" in window) {
     const section = document.querySelector(link.getAttribute("href"));
     if (section) observer.observe(section);
   }
-  observer.observe(document.querySelector('#home'));
+  const home = document.querySelector('#home');
+  if (home) observer.observe(home);
 }
 const progress = document.querySelector(".scroll-progress");
 let progressScheduled = false;

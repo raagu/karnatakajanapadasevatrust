@@ -7,14 +7,15 @@
     "node": ">=22"
   },
   "scripts": {
-    "predev": "npm run refresh-content",
+    "predev": "npm run refresh-content && npm run build",
     "refresh-content": "node scripts/render-heritage.mjs",
-    "dev": "python3 -m http.server 4173 --bind 127.0.0.1 --directory public",
+    "dev": "python3 -m http.server 4173 --bind 127.0.0.1 --directory dist",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
-    "@playwright/test": "1.64.1"
+    "@playwright/test": "1.64.1",
+    "parse5": "8.1.1"
   }
 }
