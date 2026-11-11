@@ -1,0 +1,314 @@
+{
+  "version": 3,
+  "schemaVersion": 3,
+  "source": "mantis",
+  "sourceVersion": "1.0.17",
+  "generatedAt": "2026-11-11T15:59:04.199Z",
+  "files": [
+    {
+      "file": ".github/workflows/pages.yml",
+      "action": "edited",
+      "linesAffected": 10,
+      "linesAdded": 10,
+      "linesDeleted": 2,
+      "totalLines": 107,
+      "assistant": null,
+      "actors": {
+        "ai": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "manual": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "tool": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "unknown": {
+          "added": 10,
+          "deleted": 2,
+          "changed": 12,
+          "touched": 10
+        }
+      },
+      "linesTouched": 10
+    },
+    {
+      "file": "README.md",
+      "action": "edited",
+      "linesAffected": 2,
+      "linesAdded": 2,
+      "linesDeleted": 0,
+      "totalLines": 133,
+      "assistant": null,
+      "actors": {
+        "ai": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "manual": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "tool": {
+          "added": 0,
+          "deleted": 0,
+          "changed": 0,
+          "touched": 0
+        },
+        "unknown": {
+          "added": 2,
+          "deleted": 0,
+          "changed": 2,
+          "touched": 2
+        }
+      },
+      "linesTouched": 2
+    }
+  ],
+  "hunks": [
+    {
+      "hunkId": "staged:1:.github/workflows/pages.yml",
+      "relativePath": ".github/workflows/pages.yml",
+      "oldStart": 52,
+      "oldLines": 2,
+      "newStart": 52,
+      "newLines": 10,
+      "linesAdded": 10,
+      "linesDeleted": 2,
+      "attribution": {
+        "bucket": "unknown",
+        "contributors": [
+          {
+            "actor": "unknown",
+            "tool": null,
+            "source": null,
+            "evidenceLevel": "unknown"
+          }
+        ],
+        "actors": [
+          "unknown"
+        ],
+        "aiInvolved": false,
+        "humanInvolved": false,
+        "toolInvolved": false,
+        "unknownInvolved": true
+      },
+      "evidence": {
+        "level": "unknown",
+        "kind": "unknown",
+        "source": "staged-diff",
+        "reason": null
+      },
+      "metadata": {
+        "strategy": "staged-diff-hunk-overlap-v1",
+        "stagedStatus": "M",
+        "oldPath": ".github/workflows/pages.yml",
+        "newPath": ".github/workflows/pages.yml",
+        "matchedOperationCount": 0,
+        "matchedHunkCount": 0,
+        "matchedInheritedHunkCount": 0,
+        "actorLineCounts": {
+          "ai": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "manual": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "tool": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "unknown": {
+            "added": 10,
+            "deleted": 2,
+            "changed": 12,
+            "touched": 10
+          }
+        },
+        "actorLineCountsSource": "working-tree-edited-file-actor-snapshot"
+      }
+    },
+    {
+      "hunkId": "staged:2:README.md",
+      "relativePath": "README.md",
+      "oldStart": 33,
+      "oldLines": 0,
+      "newStart": 34,
+      "newLines": 2,
+      "linesAdded": 2,
+      "linesDeleted": 0,
+      "attribution": {
+        "bucket": "unknown",
+        "contributors": [
+          {
+            "actor": "unknown",
+            "tool": null,
+            "source": null,
+            "evidenceLevel": "unknown"
+          }
+        ],
+        "actors": [
+          "unknown"
+        ],
+        "aiInvolved": false,
+        "humanInvolved": false,
+        "toolInvolved": false,
+        "unknownInvolved": true
+      },
+      "evidence": {
+        "level": "unknown",
+        "kind": "unknown",
+        "source": "staged-diff",
+        "reason": null
+      },
+      "metadata": {
+        "strategy": "staged-diff-hunk-overlap-v1",
+        "stagedStatus": "M",
+        "oldPath": "README.md",
+        "newPath": "README.md",
+        "matchedOperationCount": 0,
+        "matchedHunkCount": 0,
+        "matchedInheritedHunkCount": 0,
+        "actorLineCounts": {
+          "ai": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "manual": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "tool": {
+            "added": 0,
+            "deleted": 0,
+            "changed": 0,
+            "touched": 0
+          },
+          "unknown": {
+            "added": 2,
+            "deleted": 0,
+            "changed": 2,
+            "touched": 2
+          }
+        },
+        "actorLineCountsSource": "working-tree-edited-file-actor-snapshot"
+      }
+    }
+  ],
+  "summary": {
+    "totalHunks": 2,
+    "buckets": {
+      "ai_only": 0,
+      "human_only": 0,
+      "tool_only": 0,
+      "mixed_ai_human": 0,
+      "mixed_ai_tool": 0,
+      "mixed_human_tool": 0,
+      "mixed_ai_human_tool": 0,
+      "unknown": 2
+    },
+    "aiInvolved": 0,
+    "humanInvolved": 0,
+    "toolInvolved": 0,
+    "unknownInvolved": 2,
+    "linesAdded": 12,
+    "linesDeleted": 2
+  },
+  "reconciliation": {
+    "schemaVersion": 3,
+    "strategy": "staged-diff-hunk-overlap-v1",
+    "stagedHunkCount": 2,
+    "matchedHunkCount": 0,
+    "unknownHunkCount": 2,
+    "files": [
+      ".github/workflows/pages.yml",
+      "README.md"
+    ],
+    "lineSummaryByBucket": {
+      "ai_only": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "human_only": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "tool_only": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_ai_human": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_ai_tool": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_human_tool": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "mixed_ai_human_tool": {
+        "hunks": 0,
+        "linesAdded": 0,
+        "linesDeleted": 0
+      },
+      "unknown": {
+        "hunks": 2,
+        "linesAdded": 12,
+        "linesDeleted": 2
+      }
+    },
+    "hunkSummary": {
+      "totalHunks": 2,
+      "buckets": {
+        "ai_only": 0,
+        "human_only": 0,
+        "tool_only": 0,
+        "mixed_ai_human": 0,
+        "mixed_ai_tool": 0,
+        "mixed_human_tool": 0,
+        "mixed_ai_human_tool": 0,
+        "unknown": 2
+      },
+      "aiInvolved": 0,
+      "humanInvolved": 0,
+      "toolInvolved": 0,
+      "unknownInvolved": 2,
+      "linesAdded": 12,
+      "linesDeleted": 2
+    }
+  }
+}
