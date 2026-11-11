@@ -31,6 +31,8 @@ The repository includes `.github/workflows/pages.yml`. It tests the source and a
 
 The build uses HTTPS with the host and path returned by Pages. During custom-domain setup, Pages can report an HTTP address until **Settings → Pages → Enforce HTTPS** is enabled; that HTTP address is not a valid `SITE_URL`. The workflow therefore constructs the HTTPS address without changing the configured domain or project path. Enable **Enforce HTTPS** once the domain's certificate is ready so visitors are redirected to HTTPS as well. The build continues to reject explicitly supplied HTTP URLs, credentials, queries and fragments.
 
+The workflow uses [Chrome already installed on GitHub’s Ubuntu image](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md#browsers-and-drivers). It records the browser version and passes its executable through the existing `CHROME_PATH` test setting. It avoids installing operating-system packages or downloading another browser during deployment, so an Ubuntu package-mirror outage cannot prevent verification. A missing browser or any failing test still stops publishing.
+
 The workflow uses the explicit `ubuntu-24.04` runner and Node24-compatible Pages actions. The website build continues to use Node22. These are separate runtimes: changing the website's `node-version` does not update the runtime bundled into an action. Artifact upload includes hidden public files so `.nojekyll` is retained.
 
 One-time setup by the repository owner:

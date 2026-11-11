@@ -49,8 +49,16 @@ jobs:
       - name: Install test dependencies
         run: npm ci
 
-      - name: Install browser for verification
-        run: npx playwright install --with-deps chromium
+      # The Ubuntu image includes Chrome and its libraries. Avoid a fresh APT
+      # install: mirror DNS outages must not block browser verification.
+      - name: Select preinstalled Chrome for verification
+        run: |
+          if ! kjst_chrome_path="$(command -v google-chrome)"; then
+            echo "::error::Google Chrome is missing from the Ubuntu runner image."
+            exit 1
+          fi
+          "$kjst_chrome_path" --version
+          echo "CHROME_PATH=$kjst_chrome_path" >> "$GITHUB_ENV"
 
       - name: Refresh the static collection
         run: npm run refresh-content
